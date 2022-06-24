@@ -42,18 +42,46 @@ const Footer = () => {
             <div>
               {/* <img className="h-12" src="/images/logo.png" alt="bitcoin logo" /> */}
               {/* <Logo style={{ height: '64px', width: '64px'}}/> */}
-              <div className='mt-2 text-2xl text-white'>Dad's ₿eans</div>
+              <div className='mt-2 text-2xl text-white'>Dad's Beans</div>
             </div>
             <div
               className={`${FooterStyle.footer__text} mt-3 max-w-xl text-sm tracking-wide antialiased lg:max-w-lg`}
             >
               <p>
-                Dad's Beans showcases home-roasted coffee beans made in small
-                batches by my dad.
+                Dad's Beans showcases home-roasted coffee beans made by my dad
+                in small batches.
               </p>
               <p>
-                <span className='text-gray-300'>Who is he?</span> My dad is your
-                typical no-nonsense Asian dad.
+                <span className='text-gray-300'>Who is your dad?</span> My dad
+                is your typical no-nonsense Asian dad. He trades stocks, he
+                cooks, he walks our dog. All while dishing out life advice--
+                mostly about career choice, mostly aimed at his kids. About four
+                years ago, he started roasting coffee beans as a hobby. Now
+                retired, he has nothing better to do than cook, walk the dog,
+                and roast coffee beans.
+              </p>
+              <p>
+                <span className='text-gray-300'>
+                  What kind of life advice does your dad give?
+                </span>{' '}
+                You won't make it as an artist / movie star / musician. You
+                won't make it as a comedian either. Your startup does nothing
+                and will fail. Your cryptos will be worthless. Don't drop out of
+                school and stop day-trading. Don't quit your job. If you don't
+                pick the right career you will end up homeless, jobless, and
+                under a bridge.
+              </p>
+              <p>
+                <span className='text-gray-300'>
+                  Damn, sounds harsh. Why promote negativity about creative
+                  careers?
+                </span>{' '}
+                The market for positive, motivational, you-can-do-it messaging
+                is over-saturated. For young Asian Americans, this is especially
+                true. Quitting your job to pursue [insert creative passion here]
+                is practically a trope. Yet 99% of you will fail. If I made yet
+                another business with follow-your-dreams messaging, it wouldn't
+                stand out.
               </p>
             </div>
           </div>
