@@ -1,7 +1,8 @@
 import { AppProps } from 'next/app'
 import { getEnv } from '../../utils/vars'
-import { AuthenticatorProps } from '@aws-amplify/ui-react/dist/types/components/Authenticator/Authenticator'
 import { Amplify } from 'aws-amplify'
+import { UserProvider } from '../lib/UserProvider'
+import { useFetchUser } from '../lib/user'
 
 import '@/styles/globals.css'
 // !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
@@ -22,7 +23,15 @@ Amplify.configure({
 })
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  const { user, loading } = useFetchUser()
+  return (
+    <>
+      {console.log('user from useFetchUser', user)}
+      <UserProvider value={user}>
+        <Component {...pageProps} />
+      </UserProvider>
+    </>
+  )
 }
 
 export default MyApp

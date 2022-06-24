@@ -1,5 +1,6 @@
 import React, { useState, ReactElement } from 'react'
-import { signUp, signIn } from '../../utils/auth'
+import { signUp } from '../lib/auth'
+import { useUser } from '../lib/UserProvider'
 
 /*
   This example requires Tailwind CSS v2.0+ 
@@ -26,6 +27,8 @@ const SignUp: React.FC<Props> = (): ReactElement => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
+  const { user, setUser } = useUser()
+
   const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     setEmail(event.target.value)
@@ -41,6 +44,7 @@ const SignUp: React.FC<Props> = (): ReactElement => {
     try {
       const user = await signUp(email, password)
       console.log('user:', user)
+      setUser(user)
     } catch (error) {
       console.error(error)
     }
@@ -73,7 +77,14 @@ const SignUp: React.FC<Props> = (): ReactElement => {
             </a>
           </p> */}
         </div>
-
+        {user ? (
+          <>
+            <div>username from UserProvider: {user.username}</div>
+            {console.log('user from UserProvider:', user)}
+          </>
+        ) : (
+          <></>
+        )}
         <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
           <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
             <form className='space-y-6' action='#' method='POST'>

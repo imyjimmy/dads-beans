@@ -13,16 +13,8 @@ const informations = [
     href: '/contact',
   },
   {
-    title: 'Help / FAQ',
-    href: '/help',
-  },
-  {
-    title: 'Pricing',
-    href: '/pricing',
-  },
-  {
-    title: 'Affiliate',
-    href: '/affiliate',
+    title: 'FAQ',
+    href: '/faq',
   },
   {
     title: 'Press & Media',
@@ -50,18 +42,18 @@ const Footer = () => {
             <div>
               {/* <img className="h-12" src="/images/logo.png" alt="bitcoin logo" /> */}
               {/* <Logo style={{ height: '64px', width: '64px'}}/> */}
-              <div className='mt-2 text-2xl text-white'>₿itcoin Bachelors</div>
+              <div className='mt-2 text-2xl text-white'>Dad's ₿eans</div>
             </div>
             <div
               className={`${FooterStyle.footer__text} mt-3 max-w-xl text-sm tracking-wide antialiased lg:max-w-lg`}
             >
               <p>
-                Dad's Beans is a place for bachelors and bachelorettes who own
-                Bitcoin to date 💖 and mingle ✨.
+                Dad's Beans showcases home-roasted coffee beans made in small
+                batches by my dad.
               </p>
               <p>
-                <span className='text-gray-300'>Disclaimer:</span> Bitcoin
-                Bachelors is not an escort service.
+                <span className='text-gray-300'>Who is he?</span> My dad is your
+                typical no-nonsense Asian dad.
               </p>
             </div>
           </div>
