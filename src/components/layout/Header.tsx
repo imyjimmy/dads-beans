@@ -1,13 +1,18 @@
-import * as React from 'react';
+// * as React from 'react'
+import React, { ReactElement } from 'react'
 
-import UnstyledLink from '@/components/links/UnstyledLink';
+import UnstyledLink from '@/components/links/UnstyledLink'
 
 const links = [
   { href: '/', label: 'Route 1' },
   { href: '/', label: 'Route 2' },
-];
+]
 
-export default function Header() {
+type Props = {
+  currentPage?: string
+}
+
+const Header: React.FC<Props> = (): ReactElement => {
   return (
     <header className='sticky top-0 z-50 bg-white'>
       <div className='layout flex h-14 items-center justify-between'>
@@ -27,5 +32,7 @@ export default function Header() {
         </nav>
       </div>
     </header>
-  );
+  )
 }
+
+export default Header
