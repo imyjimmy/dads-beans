@@ -1,43 +1,105 @@
-# TypeScript Next.js example
+<div align="center">
+  <h1>🔋 ts-nextjs-tailwind-starter</h1>
+  <p>Next.js + Tailwind CSS + TypeScript starter packed with useful development features.</p>
+  <p>Made by <a href="https://theodorusclarence.com">Theodorus Clarence</a></p>
+  
+  
+  [![CodeFactor](https://www.codefactor.io/repository/github/theodorusclarence/ts-nextjs-tailwind-starter/badge/main)](https://www.codefactor.io/repository/github/theodorusclarence/ts-nextjs-tailwind-starter/overview/main)
+  [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=theodorusclarence_ts-nextjs-tailwind-starter&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=theodorusclarence_ts-nextjs-tailwind-starter)
+  [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=theodorusclarence_ts-nextjs-tailwind-starter&metric=bugs)](https://sonarcloud.io/dashboard?id=theodorusclarence_ts-nextjs-tailwind-starter)
+  [![GitHub Repo stars](https://img.shields.io/github/stars/theodorusclarence/ts-nextjs-tailwind-starter)](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter/stargazers)
+  
+  [![Depfu](https://badges.depfu.com/badges/fc6e730632ab9dacaf7df478a08684a7/overview.svg)](https://depfu.com/github/theodorusclarence/ts-nextjs-tailwind-starter?project_id=30160)
+  [![Last Update](https://img.shields.io/badge/deps%20update-every%20sunday-blue.svg)](https://shields.io/)
+</div>
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+## Features
 
-## Deploy your own
+This repository is 🔋 battery packed with:
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-typescript)
+- ⚡️ Next.js 12
+- ⚛️ React 18
+- ✨ TypeScript
+- 💨 Tailwind CSS 3 — Configured with CSS Variables to extend the **primary** color
+- 💎 Pre-built Components — Components that will **automatically adapt** with your brand color, [check here for the demo](https://tsnext-tw.thcl.dev/components)
+- 🃏 Jest — Configured for unit testing
+- 📈 Absolute Import and Path Alias — Import components using `@/` prefix
+- 📏 ESLint — Find and fix problems in your code, also will **auto sort** your imports
+- 💖 Prettier — Format your code consistently
+- 🐶 Husky & Lint Staged — Run scripts on your staged files before they are committed
+- 🤖 Conventional Commit Lint — Make sure you & your teammates follow conventional commit
+- ⏰ Standard Version Changelog — Generate your changelog using `yarn release`
+- 👷 Github Actions — Lint your code on PR
+- 🚘 Automatic Branch and Issue Autolink — Branch will be automatically created on issue **assign**, and auto linked on PR
+- 🔥 Snippets — A collection of useful snippets
+- 👀 Default Open Graph — Awesome open graph generated using [og](https://github.com/theodorusclarence/og), fork it and deploy!
+- 🗺 Site Map — Automatically generate sitemap.xml
+- 📦 Expansion Pack — Easily install common libraries, additional components, and configs
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
+See the 👉 [feature details and changelog](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter/blob/main/CHANGELOG.md) 👈 for more.
 
-## How to use it?
+You can also check all of the **details and demos** on my blog post:
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+- [One-stop Starter to Maximize Efficiency on Next.js & Tailwind CSS Projects](https://theodorusclarence.com/blog/one-stop-starter)
+
+## Getting Started
+
+### 1. Clone this template using one of the three ways:
+
+1. Use this repository as template
+
+   **Disclosure:** by using this repository as a template, there will be an attribution on your repository.
+
+   I'll appreciate if you do, so this template can be known by others too 😄
+
+   ![Use as template](https://user-images.githubusercontent.com/55318172/129183039-1a61e68d-dd90-4548-9489-7b3ccbb35810.png)
+
+2. Using `create-next-app`
+
+   ```bash
+   npx create-next-app -e https://github.com/theodorusclarence/ts-nextjs-tailwind-starter project-name
+   ```
+
+3. Deploy to Vercel
+
+   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Ftheodorusclarence%2Fts-nextjs-tailwind-starter)
+
+### 2. Install dependencies
+
+It is encouraged to use **yarn** so the husky hooks can work properly.
 
 ```bash
-npx create-next-app --example with-typescript with-typescript-app
-# or
-yarn create next-app --example with-typescript with-typescript-app
-# or
-pnpm create next-app --example with-typescript with-typescript-app
+yarn install
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+### 3. Run the development server
 
-## Notes
+You can start the server using this command:
 
-This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
-
-```
-npm install --save-dev typescript
+```bash
+yarn dev
 ```
 
-To enable TypeScript's features, we install the type declarations for React and Node.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. You can start editing the page by modifying `src/pages/index.tsx`.
 
-```
-npm install --save-dev @types/react @types/react-dom @types/node
-```
+### 4. Change defaults
 
-When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
+There are some things you need to change including title, urls, favicons, etc.
 
-Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
+Find all comments with !STARTERCONF, then follow the guide.
 
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
+Don't forget to change the package name in package.json
+
+### 5. Commit Message Convention
+
+This starter is using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), it is mandatory to use it to commit changes.
+
+## Expansion Pack 📦
+
+This starter is now equipped with an [expansion pack](https://github.com/theodorusclarence/expansion-pack).
+
+You can easily add expansion such as React Hook Form + Components, Storybook, and more just using a single command line.
+
+https://user-images.githubusercontent.com/55318172/146631994-e1cac137-1664-4cfe-950b-a96decc1eaa6.mp4
+
+Check out the [expansion pack repository](https://github.com/theodorusclarence/expansion-pack) for the commands

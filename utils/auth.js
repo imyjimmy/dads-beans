@@ -5,13 +5,13 @@ export const checkUserStatus = async () => {
     const user = await Auth.currentAuthenticatedUser()
     return user
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
 export const signIn = async (username) => {
   try {
-    const user = await Auth.signIn(username);
+    const user = await Auth.signIn(username)
     return user
   } catch (error) {
     throw new Error(error)
@@ -24,21 +24,21 @@ export const signUp = async (username, password) => {
   if (emailRegex.test(username)) {
     userAttributes = {
       email: username,
-      phone_number: ""
     }
   } else {
     userAttributes = {
-      email: "",
-      phone_number: username
+      phone_number: username,
     }
   }
 
   try {
+    console.log('username:', username, ' password:', password)
     const { user } = await Auth.signUp({
-      username: username,
-      password: password,
-      attributes: userAttributes
-    });
+      username,
+      password,
+      attributes: userAttributes,
+    })
+    console.log('user:', user)
     return user
   } catch (error) {
     throw new Error(error)
@@ -49,27 +49,25 @@ export async function answerCustomChallenge(cognitoUser, code) {
   const answerResponse = await Auth.sendCustomChallengeAnswer(cognitoUser, code)
   try {
     // confirm user is logged in
-    await Auth.currentSession();
+    await Auth.currentSession()
     return answerResponse
-  } catch (error){
-    console.log('Apparently the user did not enter the right code', error);
+  } catch (error) {
+    console.log('Apparently the user did not enter the right code', error)
   }
 }
 
 export const signOut = async () => {
   try {
-    await Auth.signOut();
+    await Auth.signOut()
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
 export const globalSignOut = async () => {
   try {
-    await Auth.signOut({ global: true });
+    await Auth.signOut({ global: true })
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
-
-
