@@ -103,3 +103,9 @@ You can easily add expansion such as React Hook Form + Components, Storybook, an
 https://user-images.githubusercontent.com/55318172/146631994-e1cac137-1664-4cfe-950b-a96decc1eaa6.mp4
 
 Check out the [expansion pack repository](https://github.com/theodorusclarence/expansion-pack) for the commands
+
+## Strapi
+
+See content in action by making an HTTP request:
+To this URL: https://<YOUR_DOMAIN>/api/<YOUR_CT>
+With the header: Authorization: bearer <YOUR_API_TOKEN>
