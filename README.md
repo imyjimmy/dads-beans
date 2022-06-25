@@ -3,7 +3,7 @@
   <p>Next.js + Tailwind CSS + TypeScript starter packed with useful development features.</p>
   <p>Made by <a href="https://theodorusclarence.com">Theodorus Clarence</a></p>
   
-  
+  [Project Template on Github](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter)
   [![CodeFactor](https://www.codefactor.io/repository/github/theodorusclarence/ts-nextjs-tailwind-starter/badge/main)](https://www.codefactor.io/repository/github/theodorusclarence/ts-nextjs-tailwind-starter/overview/main)
   [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=theodorusclarence_ts-nextjs-tailwind-starter&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=theodorusclarence_ts-nextjs-tailwind-starter)
   [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=theodorusclarence_ts-nextjs-tailwind-starter&metric=bugs)](https://sonarcloud.io/dashboard?id=theodorusclarence_ts-nextjs-tailwind-starter)
