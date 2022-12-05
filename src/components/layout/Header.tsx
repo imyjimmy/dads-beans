@@ -1,4 +1,5 @@
-// * as React from 'react'
+/* eslint react/no-unescaped-entities: 0 */
+/* eslint @next/next/no-html-link-for-pages: 0 */
 import React, { ReactElement, Fragment } from 'react'
 import Link from 'next/link'
 

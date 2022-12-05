@@ -1,3 +1,4 @@
+/* eslint react/no-unescaped-entities: 0 */
 // __./components/HomePage/Footer.tsx
 // import Logo from './Logo'
 import FooterStyle from './Footer.module.css'

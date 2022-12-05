@@ -44,6 +44,9 @@ const Products = ({ products }: Props) => {
     }
   }, [products])
 
+  if (products === undefined || products.length == 0) {
+    return <div>undefined!</div>
+  }
   return (
     <>
       {console.log('products:', products)}
@@ -98,11 +101,11 @@ const Products = ({ products }: Props) => {
               <p className='text-3xl tracking-tight text-gray-900'>
                 {size
                   ? renderPrice(
-                      product?.priceVariants.filter(
+                      product!.priceVariants.filter(
                         (variant) => variant.weight == size
-                      )[0].price!
+                      )[0].price
                     )
-                  : renderPrice(product?.priceVariants[0].price!)}{' '}
+                  : renderPrice(product!.priceVariants[0].price)}{' '}
                 | {size ?? product?.priceVariants[0].weight} oz
               </p>
 
@@ -163,7 +166,7 @@ const Products = ({ products }: Props) => {
 
                 <div className='space-y-6'>
                   <p className='text-base text-gray-900'>
-                    <RichText content={product?.description.raw!} />
+                    <RichText content={product!.description.raw} />
                   </p>
                 </div>
               </div>

@@ -1,3 +1,4 @@
+/* eslint react/no-unescaped-entities: 0 */
 import { useState } from 'react'
 import { XIcon } from '@heroicons/react/outline'
 
