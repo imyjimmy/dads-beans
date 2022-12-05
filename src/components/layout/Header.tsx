@@ -82,13 +82,7 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
                       href='/'
                       className='text-base font-medium text-gray-500 hover:text-gray-900'
                     >
-                      ₿itcoin Bachelors
-                    </a>
-                    <a
-                      href='/pricing'
-                      className='text-base font-medium text-gray-500 hover:text-gray-900'
-                    >
-                      Pricing
+                      Dad's Beans
                     </a>
                     <a
                       href='/about'

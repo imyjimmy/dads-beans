@@ -1,4 +1,6 @@
 import * as React from 'react'
+import { gql } from '@apollo/client'
+import client from '../../apollo-client'
 
 import Layout from '@/components/layout/Layout'
 import Seo from '@/components/Seo'
@@ -12,22 +14,50 @@ import Seo from '@/components/Seo'
 //  */
 // import Vercel from '~/svg/Vercel.svg'
 
-// !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
-// Before you begin editing, follow all comments with `STARTERCONF`,
-// to customize the default configuration.
+export async function getStaticProps() {
+  const { data } = await client.query({
+    query: gql`
+      query {
+        products {
+          id
+          title
+          subtitle
+          description {
+            raw
+          }
+          roastDate
+          roastLevel
+          priceVariants {
+            weight
+            price
+          }
+        }
+      }
+    `,
+  })
 
-export default function HomePage() {
+  return {
+    props: {
+      products: data.products,
+    },
+  }
+}
+
+export default function HomePage({ products }: any) {
   return (
     <Layout>
       {/* <Seo templateTitle='Home' /> */}
       <Seo />
 
       <main>
-        <section className='bg-white'>
-          <div className='layout flex min-h-screen flex-col items-center justify-center text-center'>
-            {/* <Vercel className='text-5xl' /> */}
-          </div>
-        </section>
+        <>
+          {console.log('products:', products)}
+          <section className='bg-white'>
+            <div className='layout flex min-h-screen flex-col items-center justify-center text-center'>
+              {/* <Vercel className='text-5xl' /> */}
+            </div>
+          </section>
+        </>
       </main>
     </Layout>
   )

@@ -20,11 +20,13 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
     "@aws-amplify/ui-react": "^3.0.2",
     "@headlessui/react": "^1.6.5",
     "@heroicons/react": "^1.0.6",
     "aws-amplify": "^4.3.26",
     "clsx": "^1.1.1",
+    "graphql": "^16.5.0",
     "next": "^12.1.6",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

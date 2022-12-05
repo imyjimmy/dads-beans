@@ -1,20 +1,25 @@
-import { Amplify } from "aws-amplify";
+import { Amplify } from 'aws-amplify'
 
-const devKeys: { [keyName: string] : string } = {
-  'awsRegion': 'us-east-1',
-  'userPoolId': 'us-east-1_WFqe8bYWp',
-  'userPoolWebClientId': '1h98jbb3founicqlhf2n215puq'
+// restart dev server to see changes take effect
+const devKeys: { [keyName: string]: string } = {
+  awsRegion: process!.env!.AWS_REGION!,
+  userPoolId: process!.env!.AWS_USER_POOL_ID!,
+  userPoolWebClientId: process!.env!.AWS_WEB_CLIENT_ID!,
+  graphqlApi: process!.env!.HYGRAPH_CONTENT_API!,
+  authToken: process!.env!.HYGRAPH_DEVELOPMENT!,
 }
 
-const prodKeys: { [keyName: string] : string } = {
-  'awsRegion': 'us-east-1',
-  'userPoolId': 'us-east-1_WFqe8bYWp',
-  'userPoolWebClientId': '1h98jbb3founicqlhf2n215puq'
+const prodKeys: { [keyName: string]: string } = {
+  awsRegion: process!.env!.AWS_REGION!,
+  userPoolId: process!.env!.AWS_USER_POOL_ID!,
+  userPoolWebClientId: process!.env!.AWS_WEB_CLIENT_ID!,
+  graphqlApi: process!.env!.HYGRAPH_CONTENT_API!,
+  authToken: process!.env!.HYGRAPH_PRODUCTION!,
 }
 
 // check enviroment if development || production
 const getEnv = (requestedKey: string) => {
-  if(!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
     return devKeys[requestedKey]
   } else {
     return prodKeys[requestedKey]
@@ -26,7 +31,8 @@ const amplify = Amplify.configure({
     region: getEnv('awsRegion'),
     userPoolId: getEnv('userPoolId'),
     userPoolWebClientId: getEnv('userPoolWebClientId'),
-  }, ssr: true
-});
+  },
+  ssr: true,
+})
 
 export { getEnv, amplify }

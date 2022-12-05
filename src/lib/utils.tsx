@@ -8,3 +8,14 @@ export const circlePic = (request: string) => {
   const returnValue = imageArr.join('/')
   return returnValue
 }
+
+/* check if the profile_pic is https, http or an ID */
+export const validateImageURL = (image: string) => {
+  let regex =
+    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)/g
+  if (regex.test(image)) {
+    return image
+  } else {
+    return
+  }
+}
