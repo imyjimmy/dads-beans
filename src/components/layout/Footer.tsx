@@ -48,17 +48,17 @@ const Footer = () => {
               className={`${FooterStyle.footer__text} mt-3 max-w-xl text-sm tracking-wide antialiased lg:max-w-lg`}
             >
               <p>
-                Dad's Beans showcases home-roasted coffee beans made by my dad
-                in small batches.
+                Dad's Beans features small batch home-roasted coffee beans made
+                by my dad!
               </p>
               <p>
                 <span className='text-gray-300'>Who is your dad?</span> My dad
                 is your typical no-nonsense Asian dad. He trades stocks, he
-                cooks, he walks our dog. All while dishing out life advice--
+                cooks, he walks our dog, all while dishing out life advice--
                 mostly about career choice, mostly aimed at his kids. About four
                 years ago, he started roasting coffee beans as a hobby. Now
-                retired, he has nothing better to do than cook, walk the dog,
-                and roast coffee beans.
+                retired, he has nothing better to do than cook, walk our dog,
+                and roast coffee beans all day.
               </p>
               <p>
                 <span className='text-gray-300'>
@@ -127,7 +127,7 @@ const Footer = () => {
               SOCIAL MEDIA
             </div>
             <div className='mt-4 flex items-center space-x-3'>
-              <a href='https://twitter.com/btcbachelors'>
+              <a href='https://twitter.com/imyjimmy'>
                 <button className='inline-flex items-center space-x-2 rounded bg-blue-400 p-3 font-semibold text-white'>
                   <svg
                     className='h-4 w-4 fill-current'

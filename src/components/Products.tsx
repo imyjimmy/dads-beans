@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import StarIcon from '@heroicons/react/solid/StarIcon'
 import { RadioGroup } from '@headlessui/react'
-
+import { RichText } from '@graphcms/rich-text-react-renderer'
+import { ElementNode } from '@graphcms/rich-text-types'
 import { renderPrice } from '@/lib/utils'
 
 type PriceVariant = {
@@ -13,7 +13,7 @@ type Product = {
   id: string
   title: string
   subTitle: string
-  description: { raw: string }
+  description: { raw: { children: ElementNode[] } }
   roastDate: string
   roastLevel: string
   priceVariants: PriceVariant[]
@@ -23,58 +23,7 @@ type Props = {
   products: Product[]
 }
 
-// const product = {
-//   name: 'Basic Tee 6-Pack',
-//   price: '$192',
-//   href: '#',
-//   breadcrumbs: [
-//     { id: 1, name: 'Men', href: '#' },
-//     { id: 2, name: 'Clothing', href: '#' },
-//   ],
-//   images: [
-//     {
-//       src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-//       alt: 'Two each of gray, white, and black shirts laying flat.',
-//     },
-//     {
-//       src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-//       alt: 'Model wearing plain black basic tee.',
-//     },
-//     {
-//       src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-//       alt: 'Model wearing plain gray basic tee.',
-//     },
-//     {
-//       src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-//       alt: 'Model wearing plain white basic tee.',
-//     },
-//   ],
-//   colors: [
-//     { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-//     { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-//     { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-//   ],
-//   sizes: [
-//     { name: 'XXS', inStock: false },
-//     { name: 'XS', inStock: true },
-//     { name: 'S', inStock: true },
-//     { name: 'M', inStock: true },
-//     { name: 'L', inStock: true },
-//     { name: 'XL', inStock: true },
-//     { name: '2XL', inStock: true },
-//     { name: '3XL', inStock: true },
-//   ],
-//   description:
-//     'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-//   highlights: [
-//     'Hand cut and sewn locally',
-//     'Dyed with our proprietary colors',
-//     'Pre-washed & pre-shrunk',
-//     'Ultra-soft 100% cotton',
-//   ],
-//   details:
-//     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-// }
+// a pretend data structure called reviews
 const reviews = { href: '#', average: 4, totalCount: 117 }
 
 function classNames(...classes: string[]) {
@@ -147,37 +96,15 @@ const Products = ({ products }: Props) => {
             <div className='mt-4 lg:row-span-3 lg:mt-0'>
               <h2 className='sr-only'>Product information</h2>
               <p className='text-3xl tracking-tight text-gray-900'>
-                {renderPrice(product?.priceVariants[0].price!)} |{' '}
-                {product?.priceVariants[0].weight} oz
+                {size
+                  ? renderPrice(
+                      product?.priceVariants.filter(
+                        (variant) => variant.weight == size
+                      )[0].price!
+                    )
+                  : renderPrice(product?.priceVariants[0].price!)}{' '}
+                | {size ?? product?.priceVariants[0].weight} oz
               </p>
-
-              {/* Reviews */}
-              <div className='mt-6'>
-                <h3 className='sr-only'>Reviews</h3>
-                <div className='flex items-center'>
-                  <div className='flex items-center'>
-                    {[0, 1, 2, 3, 4].map((rating) => (
-                      <StarIcon
-                        key={rating}
-                        className={classNames(
-                          reviews.average > rating
-                            ? 'text-gray-900'
-                            : 'text-gray-200',
-                          'h-5 w-5 flex-shrink-0'
-                        )}
-                        aria-hidden='true'
-                      />
-                    ))}
-                  </div>
-                  <p className='sr-only'>{reviews.average} out of 5 stars</p>
-                  <a
-                    href={reviews.href}
-                    className='ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500'
-                  >
-                    {reviews.totalCount} reviews
-                  </a>
-                </div>
-              </div>
 
               <form className='mt-10'>
                 {/* Sizes */}
@@ -195,7 +122,7 @@ const Products = ({ products }: Props) => {
                       {product?.priceVariants.map((priceVariant) => (
                         <RadioGroup.Option
                           key={priceVariant.weight}
-                          value={size}
+                          value={priceVariant.weight}
                           // disabled={!size.inStock}
                           className={({ active }) =>
                             classNames(
@@ -236,34 +163,10 @@ const Products = ({ products }: Props) => {
 
                 <div className='space-y-6'>
                   <p className='text-base text-gray-900'>
-                    {/* {product?.description} */}
+                    <RichText content={product?.description.raw!} />
                   </p>
                 </div>
               </div>
-
-              {/* <div className='mt-10'>
-                <h3 className='text-sm font-medium text-gray-900'>
-                  Highlights
-                </h3>
-
-                <div className='mt-4'>
-                  <ul role='list' className='list-disc space-y-2 pl-4 text-sm'>
-                    {product.highlights.map((highlight) => (
-                      <li key={highlight} className='text-gray-400'>
-                        <span className='text-gray-600'>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <div className='mt-10'>
-                <h2 className='text-sm font-medium text-gray-900'>Details</h2>
-
-                <div className='mt-4 space-y-6'>
-                  <p className='text-sm text-gray-600'>{product.details}</p>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
@@ -273,3 +176,36 @@ const Products = ({ products }: Props) => {
 }
 
 export default Products
+
+{
+  /* Reviews */
+  // import StarIcon from '@heroicons/react/solid/StarIcon'
+}
+{
+  /* <div className='mt-6'>
+  <h3 className='sr-only'>Reviews</h3>
+  <div className='flex items-center'>
+    <div className='flex items-center'>
+      {[0, 1, 2, 3, 4].map((rating) => (
+        <StarIcon
+          key={rating}
+          className={classNames(
+            reviews.average > rating
+              ? 'text-gray-900'
+              : 'text-gray-200',
+            'h-5 w-5 flex-shrink-0'
+          )}
+          aria-hidden='true'
+        />
+      ))}
+    </div>
+    <p className='sr-only'>{reviews.average} out of 5 stars</p>
+    <a
+      href={reviews.href}
+      className='ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500'
+    >
+      {reviews.totalCount} reviews
+    </a>
+  </div>
+</div> */
+}
