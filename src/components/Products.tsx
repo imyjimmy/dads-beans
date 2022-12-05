@@ -44,12 +44,12 @@ const Products = ({ products }: Props) => {
     }
   }, [products])
 
-  if (products === undefined || products.length == 0) {
+  if (product == undefined || products === undefined || products.length == 0) {
     return <div>undefined!</div>
   }
   return (
     <>
-      {console.log('products:', products)}
+      {/* {console.log('products!:', products[0].priceVariants[0].price)} */}
       <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'></div>
       <div className='bg-white'>
         <div className='pt-6'>
@@ -105,8 +105,8 @@ const Products = ({ products }: Props) => {
                         (variant) => variant.weight == size
                       )[0].price
                     )
-                  : renderPrice(product!.priceVariants[0].price)}{' '}
-                | {size ?? product?.priceVariants[0].weight} oz
+                  : renderPrice(product!.priceVariants[0]!.price)}{' '}
+                | {size ?? product!.priceVariants[0]!.weight} oz
               </p>
 
               <form className='mt-10'>
@@ -122,7 +122,7 @@ const Products = ({ products }: Props) => {
                       Choose a size{' '}
                     </RadioGroup.Label>
                     <div className='grid grid-cols-3 gap-4 sm:grid-cols-3 lg:grid-cols-3'>
-                      {product?.priceVariants.map((priceVariant) => (
+                      {product!.priceVariants!.map((priceVariant) => (
                         <RadioGroup.Option
                           key={priceVariant.weight}
                           value={priceVariant.weight}
