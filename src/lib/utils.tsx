@@ -19,3 +19,7 @@ export const validateImageURL = (image: string) => {
     return
   }
 }
+
+export const renderPrice = (price: number): string => {
+  return '$' + price / 100
+}

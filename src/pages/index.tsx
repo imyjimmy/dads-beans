@@ -3,6 +3,7 @@ import { gql } from '@apollo/client'
 import client from '../../apollo-client'
 
 import Layout from '@/components/layout/Layout'
+import Products from '@/components/Products'
 import Seo from '@/components/Seo'
 
 // /**
@@ -51,10 +52,10 @@ export default function HomePage({ products }: any) {
 
       <main>
         <>
-          {console.log('products:', products)}
           <section className='bg-white'>
             <div className='layout flex min-h-screen flex-col items-center justify-center text-center'>
               {/* <Vercel className='text-5xl' /> */}
+              <Products products={products} />
             </div>
           </section>
         </>
