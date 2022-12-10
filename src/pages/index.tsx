@@ -32,6 +32,10 @@ export async function getStaticProps() {
             weight
             price
           }
+          pictures {
+            fileName
+            url
+          }
         }
       }
     `,

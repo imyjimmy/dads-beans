@@ -9,6 +9,11 @@ type PriceVariant = {
   price: number
 }
 
+type Pictures = {
+  fileName: string
+  url: string
+}
+
 type Product = {
   id: string
   title: string
@@ -17,6 +22,7 @@ type Product = {
   roastDate: string
   roastLevel: string
   priceVariants: PriceVariant[]
+  pictures: Pictures[]
 }
 
 type Props = {
@@ -49,43 +55,43 @@ const Products = ({ products }: Props) => {
   }
   return (
     <>
-      {/* {console.log('products!:', products[0].priceVariants[0].price)} */}
+      {/* {console.log('products!:', products[0])} */}
       <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'></div>
       <div className='bg-white'>
         <div className='pt-6'>
           {/* Image gallery */}
-          {/* <div className='mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8'>
+          <div className='mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8'>
             <div className='aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block'>
               <img
-                src={product.images[0].src}
-                alt={product.images[0].alt}
+                src={product.pictures[0].url}
+                // alt={product.pictures[0].alt}
                 className='h-full w-full object-cover object-center'
               />
             </div>
             <div className='hidden lg:grid lg:grid-cols-1 lg:gap-y-8'>
               <div className='aspect-w-3 aspect-h-2 overflow-hidden rounded-lg'>
                 <img
-                  src={product.images[1].src}
-                  alt={product.images[1].alt}
+                  src={product.pictures[1].url}
+                  // alt={product.pictures[1].alt}
                   className='h-full w-full object-cover object-center'
                 />
               </div>
               <div className='aspect-w-3 aspect-h-2 overflow-hidden rounded-lg'>
                 <img
-                  src={product.images[2].src}
-                  alt={product.images[2].alt}
+                  src={product.pictures[2].url}
+                  // alt={product.pictures[2].alt}
                   className='h-full w-full object-cover object-center'
                 />
               </div>
             </div>
             <div className='aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4'>
               <img
-                src={product.images[3].src}
-                alt={product.images[3].alt}
+                src={product.pictures[3].url}
+                // alt={product.pictures[3].alt}
                 className='h-full w-full object-cover object-center'
               />
             </div>
-          </div> */}
+          </div>
 
           {/* Product info */}
           <div className='mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24'>
