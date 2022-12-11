@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react'
+import { FormEvent, useState, useEffect } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { RichText } from '@graphcms/rich-text-react-renderer'
 import { ElementNode } from '@graphcms/rich-text-types'
 import { renderPrice } from '@/lib/utils'
+
+import { useShoppingCart } from '@/components/ShoppingCartContext'
 
 type PriceVariant = {
   weight: number
@@ -30,7 +32,7 @@ type Props = {
 }
 
 // a pretend data structure called reviews
-const reviews = { href: '#', average: 4, totalCount: 117 }
+// const reviews = { href: '#', average: 4, totalCount: 117 }
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -40,9 +42,19 @@ const Products = ({ products }: Props) => {
   // const [selectedColor, setSelectedColor] = useState(product.colors[0])
   // const [selectedSize, setSelectedSize] = useState(product.sizes[2])
 
-  const [size, setSize] = useState<number>()
-  const [quantity, setQuantity] = useState<number>()
+  // probably a hack but its data about the product!!
   const [product, setProduct] = useState<Product>()
+
+  const [size, setSize] = useState<number>()
+  const [quantity, setQuantity] = useState<number>(1)
+
+  const { setCart } = useShoppingCart()
+
+  const onSubmit = (event: FormEvent): void => {
+    event.preventDefault()
+    console.log('submit!!!')
+    setCart({ product: product?.title, size, quantity })
+  }
 
   useEffect(() => {
     if (products && products.length > 0) {
@@ -115,7 +127,7 @@ const Products = ({ products }: Props) => {
                 | {size ?? product!.priceVariants[0]!.weight} oz
               </p>
 
-              <form className='mt-10'>
+              <form className='mt-10' onSubmit={onSubmit}>
                 {/* Sizes */}
                 <div className='mt-10'>
                   <div className='flex items-center justify-between'>
@@ -154,13 +166,30 @@ const Products = ({ products }: Props) => {
                       ))}
                     </div>
                   </RadioGroup>
+
+                  <div className='relative my-4 rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:border-indigo-600 focus-within:ring-1 focus-within:ring-indigo-600'>
+                    <label
+                      htmlFor='quantity'
+                      className='absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900'
+                    >
+                      Quantity
+                    </label>
+                    <input
+                      type='number'
+                      name='quantity'
+                      id='quantity'
+                      value={quantity}
+                      onChange={() => setQuantity}
+                      className='block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm'
+                    />
+                  </div>
                 </div>
 
                 <button
                   type='submit'
-                  className='mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+                  className='mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-amber-800 py-3 px-8 text-base font-medium text-white hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2'
                 >
-                  Add to bag
+                  Add to Cart
                 </button>
               </form>
             </div>

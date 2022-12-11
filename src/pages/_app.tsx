@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { user, loading } = useFetchUser()
   return (
     <>
-      {console.log('user from useFetchUser', user)}
+      {/* {console.log('user from useFetchUser', user)} */}
       <UserProvider value={user}>
         <Component {...pageProps} />
       </UserProvider>

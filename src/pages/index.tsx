@@ -6,6 +6,7 @@ import Layout from '@/components/layout/Layout'
 import Products from '@/components/Products'
 import Seo from '@/components/Seo'
 
+import { ShoppingCartProvider } from '@/components/ShoppingCartContext'
 // /**
 //  * SVGR Support
 //  * Caveat: No React Props Type.
@@ -59,7 +60,9 @@ export default function HomePage({ products }: any) {
           <section className='bg-white'>
             <div className='layout flex min-h-screen flex-col items-center justify-center text-center'>
               {/* <Vercel className='text-5xl' /> */}
-              <Products products={products} />
+              <ShoppingCartProvider>
+                <Products products={products} />
+              </ShoppingCartProvider>
             </div>
           </section>
         </>
