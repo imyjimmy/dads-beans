@@ -46,13 +46,12 @@ const Products = ({ products }: Props) => {
   const [product, setProduct] = useState<Product>()
 
   const [size, setSize] = useState<number>()
-  const [quantity, setQuantity] = useState<number>(1)
+  const [quantity, setQuantity] = useState<number>()
 
   const { setCart } = useShoppingCart()
 
   const onSubmit = (event: FormEvent): void => {
     event.preventDefault()
-    console.log('submit!!!')
     setCart({ product: product?.title, size, quantity })
   }
 
@@ -179,7 +178,13 @@ const Products = ({ products }: Props) => {
                       name='quantity'
                       id='quantity'
                       value={quantity}
-                      onChange={() => setQuantity}
+                      onChange={(event) => {
+                        setQuantity(
+                          event.target.value === ''
+                            ? undefined
+                            : Number(event.target.value)
+                        )
+                      }}
                       className='block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm'
                     />
                   </div>
