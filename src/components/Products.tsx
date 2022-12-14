@@ -3,6 +3,7 @@ import { RadioGroup } from '@headlessui/react'
 import { RichText } from '@graphcms/rich-text-react-renderer'
 import { ElementNode } from '@graphcms/rich-text-types'
 import { renderPrice } from '@/lib/utils'
+
 import toast, { Toaster } from 'react-hot-toast'
 import styles from '@/styles/products.module.css'
 import { ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
@@ -41,6 +42,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
+/* toast */
 const notify = (): string =>
   toast.custom(
     (t) => (
@@ -51,38 +53,78 @@ const notify = (): string =>
         )}
       >
         <div className={styles.iconWrapper}>
-          <ShoppingBagIcon />
+          <ShoppingBagIcon className='h-6 w-6' />
         </div>
         <div className={styles.contentWrapper}>
-          <h1>New version available</h1>
-          <p>
-            An improved version of VESSEL is now available, refresh to update.
-          </p>
+          <h1>Added to your Cart!</h1>
+          <p></p>
         </div>
         <div className={styles.closeIcon} onClick={() => toast.dismiss(t.id)}>
-          <XIcon />
+          <XIcon className='h-6 w-6' />
         </div>
       </div>
     ),
     { id: 'unique-notification', position: 'top-center' }
   )
 
-const Products = ({ products }: Props) => {
-  // const [selectedColor, setSelectedColor] = useState(product.colors[0])
-  // const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+type CartItem = {
+  product: string
+  quantity: number
+  weight: number
+}
 
+const Products = ({ products }: Props) => {
   // probably a hack but its data about the product!!
   const [product, setProduct] = useState<Product>()
 
-  const [size, setSize] = useState<number>()
-  const [quantity, setQuantity] = useState<number>()
+  const [weight, setWeight] = useState<number>()
+  const [quantity, setQuantity] = useState<number | undefined>(1)
 
-  const { setCart } = useShoppingCart()
+  const { cart, setCart } = useShoppingCart()
 
   const onSubmit = (event: FormEvent): void => {
     event.preventDefault()
-    notify()
-    setCart({ product: product?.title, size, quantity })
+    try {
+      if (!weight) {
+        throw 'selet a size!'
+      }
+      if (cart) {
+        let cartItem = cart.filter(
+          (item: CartItem) =>
+            product?.title === item.product && weight === item.weight
+        )
+
+        if (cartItem.length > 1) {
+          throw 'cart has a duplicate item'
+        }
+        cartItem = cartItem[0]
+
+        setCart([
+          ...cart.filter(
+            (item: CartItem) =>
+              product?.title !== item.product || weight !== item.weight // we keep the item without updating it
+          ),
+          cartItem
+            ? { ...cartItem, quantity: cartItem.quantity + quantity }
+            : { product: product?.title, weight, quantity },
+        ])
+      } else {
+        setCart([{ product: product?.title, weight, quantity }])
+      }
+      notify()
+    } catch (e) {
+      console.error(e)
+    }
+
+    /*
+                                                cart.title !=     cart.weight !=
+  Cart:                   Item:                 item.title ?      item.weight ?
+    December Roast          December Roast      false             true
+    12 oz                   16 oz
+
+    December Roast                              false             false
+    16 oz
+  */
   }
 
   useEffect(() => {
@@ -97,6 +139,7 @@ const Products = ({ products }: Props) => {
   return (
     <>
       {/* {console.log('products!:', products[0])} */}
+      {console.log('cart: ', cart)}
       <Toaster />
       <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'></div>
       <div className='bg-white'>
@@ -147,14 +190,14 @@ const Products = ({ products }: Props) => {
             <div className='mt-4 lg:row-span-3 lg:mt-0'>
               <h2 className='sr-only'>Product information</h2>
               <p className='text-3xl tracking-tight text-gray-900'>
-                {size
+                {weight
                   ? renderPrice(
                       product!.priceVariants.filter(
-                        (variant) => variant.weight == size
+                        (variant) => variant.weight == weight
                       )[0].price
                     )
                   : renderPrice(product!.priceVariants[0]!.price)}{' '}
-                | {size ?? product!.priceVariants[0]!.weight} oz
+                | {weight ?? product!.priceVariants[0]!.weight} oz
               </p>
 
               <form className='mt-10' onSubmit={onSubmit}>
@@ -164,7 +207,11 @@ const Products = ({ products }: Props) => {
                     <h3 className='text-sm font-medium text-gray-900'>Size</h3>
                   </div>
 
-                  <RadioGroup value={size} onChange={setSize} className='mt-4'>
+                  <RadioGroup
+                    value={weight}
+                    onChange={setWeight}
+                    className='mt-4'
+                  >
                     <RadioGroup.Label className='sr-only'>
                       {' '}
                       Choose a size{' '}
@@ -245,9 +292,9 @@ const Products = ({ products }: Props) => {
                 <h3 className='sr-only'>Description</h3>
 
                 <div className='space-y-6'>
-                  <p className='text-base text-gray-900'>
+                  <div className='text-base text-gray-900'>
                     <RichText content={product!.description.raw} />
-                  </p>
+                  </div>
                 </div>
               </div>
             </div>
