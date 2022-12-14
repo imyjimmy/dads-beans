@@ -7,13 +7,15 @@ import { useRouter } from 'next/router'
 
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import { circlePic } from '../../lib/utils'
 import { useUser } from '../../lib/UserProvider'
 import styles from './Header.module.css'
-import ShoppingBagIcon from '@heroicons/react/outline'
+import { ShoppingBagIcon } from '@heroicons/react/outline'
 
+/*
+import { circlePic } from '../../lib/utils'
 import SvgShoppingBag from '../icons/ShoppingBag'
 import UnstyledLink from '@/components/links/UnstyledLink'
+*/
 
 const links = [
   { href: '/', label: 'Route 1' },
@@ -197,7 +199,8 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
                 ) : (
                   <>
                     <a href='/cart'>
-                      <SvgShoppingBag className='h-6 w-6' />
+                      {/* <SvgShoppingBag className='h-6 w-6' /> */}
+                      <ShoppingBagIcon className='h-6 w-6' />
                     </a>
                     {/* <a
                       href='/login'

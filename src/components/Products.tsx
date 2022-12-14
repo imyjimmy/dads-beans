@@ -3,6 +3,9 @@ import { RadioGroup } from '@headlessui/react'
 import { RichText } from '@graphcms/rich-text-react-renderer'
 import { ElementNode } from '@graphcms/rich-text-types'
 import { renderPrice } from '@/lib/utils'
+import toast, { Toaster } from 'react-hot-toast'
+import styles from '@/styles/products.module.css'
+import { ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
 
 import { useShoppingCart } from '@/components/ShoppingCartContext'
 
@@ -38,6 +41,32 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
+const notify = (): string =>
+  toast.custom(
+    (t) => (
+      <div
+        className={classNames(
+          styles.notificationWrapper,
+          t.visible ? 'top-0' : '-top-96'
+        )}
+      >
+        <div className={styles.iconWrapper}>
+          <ShoppingBagIcon />
+        </div>
+        <div className={styles.contentWrapper}>
+          <h1>New version available</h1>
+          <p>
+            An improved version of VESSEL is now available, refresh to update.
+          </p>
+        </div>
+        <div className={styles.closeIcon} onClick={() => toast.dismiss(t.id)}>
+          <XIcon />
+        </div>
+      </div>
+    ),
+    { id: 'unique-notification', position: 'top-center' }
+  )
+
 const Products = ({ products }: Props) => {
   // const [selectedColor, setSelectedColor] = useState(product.colors[0])
   // const [selectedSize, setSelectedSize] = useState(product.sizes[2])
@@ -52,6 +81,7 @@ const Products = ({ products }: Props) => {
 
   const onSubmit = (event: FormEvent): void => {
     event.preventDefault()
+    notify()
     setCart({ product: product?.title, size, quantity })
   }
 
@@ -67,6 +97,7 @@ const Products = ({ products }: Props) => {
   return (
     <>
       {/* {console.log('products!:', products[0])} */}
+      <Toaster />
       <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'></div>
       <div className='bg-white'>
         <div className='pt-6'>
@@ -149,7 +180,7 @@ const Products = ({ products }: Props) => {
                               // size.inStock
                               'cursor-pointer bg-white text-gray-900 shadow-sm',
                               // : 'cursor-not-allowed bg-gray-50 text-gray-200',
-                              active ? 'ring-2 ring-indigo-500' : '',
+                              active ? 'ring-2 ring-amber-800' : '',
                               'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
                             )
                           }
@@ -159,6 +190,15 @@ const Products = ({ products }: Props) => {
                               <RadioGroup.Label as='span'>
                                 {priceVariant.weight} oz
                               </RadioGroup.Label>
+                              <span
+                                className={classNames(
+                                  active ? 'border' : 'border-2',
+                                  checked
+                                    ? 'border-amber-800'
+                                    : 'border-transparent',
+                                  'pointer-events-none absolute -inset-px rounded-md'
+                                )}
+                              />
                             </>
                           )}
                         </RadioGroup.Option>
