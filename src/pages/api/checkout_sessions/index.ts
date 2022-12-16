@@ -11,7 +11,7 @@ const MIN_AMOUNT = 1.0
 const MAX_AMOUNT = 5000.0
 const AMOUNT_STEP = 5.0
 
-const stripe = new Stripe(getEnv('stripeSecret'), { apiVersion: '2022-08-01' })
+const stripe = new Stripe(getEnv('stripeSecret'), { apiVersion: '2022-11-15' })
 
 export default async function handler(
   req: NextApiRequest,
@@ -32,12 +32,16 @@ export default async function handler(
           {
             price_data: {
               currency: 'usd',
-              product: 'hey',
+              // product: 'prod_MzSXIKBYqakFtx',
+              product_data: {
+                name: 'Dads December Roast',
+              },
+              unit_amount: formatAmountForStripe(amount, CURRENCY),
             },
-            amount: formatAmountForStripe(amount, CURRENCY),
             quantity: 1,
           },
         ],
+        mode: 'payment',
         success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/donate-with-checkout`,
       }
