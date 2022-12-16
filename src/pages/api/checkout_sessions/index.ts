@@ -26,7 +26,21 @@ export default async function handler(
       }
       // Create Checkout Sessions from body params.
       const params: Stripe.Checkout.SessionCreateParams = {
-        submit_type: 'donate',
+        submit_type: 'pay',
+        shipping_address_collection: { allowed_countries: ['US'] },
+        shipping_options: [
+          {
+            shipping_rate_data: {
+              type: 'fixed_amount',
+              fixed_amount: { amount: 800, currency: 'usd' },
+              display_name: 'Shipping',
+              delivery_estimate: {
+                minimum: { unit: 'business_day', value: 5 },
+                maximum: { unit: 'business_day', value: 7 },
+              },
+            },
+          },
+        ],
         payment_method_types: ['card'],
         line_items: [
           {
