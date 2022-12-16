@@ -7,6 +7,8 @@ const devKeys: { [keyName: string]: string } = {
   userPoolWebClientId: process!.env!.AWS_WEB_CLIENT_ID!,
   graphqlApi: process!.env!.HYGRAPH_CONTENT_API!,
   authToken: process!.env!.HYGRAPH_DEVELOPMENT!,
+  stripePublic: process!.env!.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+  stripeSecret: process!.env!.STRIPE_SECRET_KEY!,
 }
 
 const prodKeys: { [keyName: string]: string } = {
@@ -15,6 +17,8 @@ const prodKeys: { [keyName: string]: string } = {
   userPoolWebClientId: process!.env!.AWS_WEB_CLIENT_ID!,
   graphqlApi: process!.env!.HYGRAPH_CONTENT_API!,
   authToken: process!.env!.HYGRAPH_PRODUCTION!,
+  stripePublic: process!.env!.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+  stripeSecret: process!.env!.STRIPE_SECRET_KEY!,
 }
 
 // check enviroment if development || production

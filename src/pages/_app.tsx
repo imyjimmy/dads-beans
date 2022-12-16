@@ -1,5 +1,5 @@
 import { AppProps } from 'next/app'
-import { getEnv } from '../../utils/vars'
+import { getEnv } from '../lib/vars'
 import { Amplify } from 'aws-amplify'
 import { UserProvider } from '../lib/UserProvider'
 import { useFetchUser } from '../lib/user'

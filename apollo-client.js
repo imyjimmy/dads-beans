@@ -1,6 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
-import { getEnv } from './utils/vars'
+import { getEnv } from './src/lib/vars'
 
 const httpLink = createHttpLink({
   uri: getEnv('graphqlApi'),
