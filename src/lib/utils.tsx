@@ -22,7 +22,7 @@ export const validateImageURL = (image: string) => {
 }
 
 export const renderPrice = (price: number): string => {
-  return '$' + price / 100 + '.' + (price % 100 == 0 ? '00' : price % 100)
+  return '$' + price / 100 + '.' + (price % 100 || '00')
 }
 
 /* stripe functions */

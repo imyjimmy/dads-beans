@@ -23,7 +23,7 @@ type Picture = {
 type Product = {
   id: string
   title: string
-  subTitle: string
+  subtitle: string
   description: { raw: { children: ElementNode[] } }
   roastDate: string
   roastLevel: string
@@ -314,11 +314,19 @@ const Products = ({ products }: Props) => {
             <div className='py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8'>
               {/* Description and details */}
               <div>
+                <h3 className='text-xl'>{product?.subtitle}</h3>
                 <h3 className='sr-only'>Description</h3>
 
-                <div className='space-y-6'>
+                <div className='mt-4 flex flex-col space-y-8'>
                   <div className='text-base text-gray-900'>
-                    <RichText content={product!.description.raw} />
+                    <RichText
+                      content={product!.description.raw}
+                      renderers={{
+                        h4: ({ children }) => (
+                          <h4 className='my-2'>{children}</h4>
+                        ),
+                      }}
+                    />
                   </div>
                 </div>
               </div>

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 
 import { useShoppingCart } from '@/components/ShoppingCartContext'
-import { CheckIcon, ClockIcon } from '@heroicons/react/solid'
+// import { CheckIcon, ClockIcon } from '@heroicons/react/solid'
 
-import CustomDonationInput from '@/components/CustomDonationInput'
-import StripeTestCards from '@/components/StripeTestCards'
+// import CustomDonationInput from '@/components/CustomDonationInput'
+// import StripeTestCards from '@/components/StripeTestCards'
 
 import getStripe from '@/lib/get-stripe'
 import { fetchPostJSON } from '@/lib/api'
-import { formatAmountForDisplay, renderPrice } from '@/lib/utils'
+import { renderPrice } from '@/lib/utils'
 
 //<configs>
 export const CURRENCY = 'usd'
@@ -57,7 +57,7 @@ const CheckoutForm = () => {
     setLoading(true)
     // Create a Checkout Session.
     const response = await fetchPostJSON('/api/checkout_sessions', {
-      amount: input.customDonation,
+      amount: subTotalPrice / 100,
     })
 
     if (response.statusCode === 500) {
@@ -83,88 +83,112 @@ const CheckoutForm = () => {
   return (
     <>
       {console.log('cart:', cart)}
-      <div className='mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:px-0'>
-        <h1 className='text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
+      <div className='mx-auto max-w-4xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8'>
+        <h1 className='text-3xl font-bold tracking-tight text-gray-900'>
           Shopping Cart
         </h1>
 
-        <form className='mt-12'>
-          <section aria-labelledby='cart-heading'>
-            <h2 id='cart-heading' className='sr-only'>
-              Items in your shopping cart
-            </h2>
+        <form className='mt-12' onSubmit={handleSubmit}>
+          <div>
+            <h2 className='sr-only'>Items in your shopping cart</h2>
+
             <ul
               role='list'
               className='divide-y divide-gray-200 border-t border-b border-gray-200'
             >
               {cart &&
-                cart.map((item: CartItem, index: number) => (
-                  <li key={index} className='flex py-6'>
+                cart.map((item: CartItem, productIdx: number) => (
+                  <li key={productIdx} className='flex py-6 sm:py-10'>
                     <div className='flex-shrink-0'>
                       <img
                         src={item.thumbnail}
-                        // alt={item.imageAlt}
-                        className='h-24 w-24 rounded-md object-cover object-center sm:h-32 sm:w-32'
+                        // alt={product.imageAlt}
+                        className='h-24 w-24 rounded-lg object-cover object-center sm:h-32 sm:w-32'
                       />
                     </div>
 
-                    <div className='ml-4 flex flex-1 flex-col sm:ml-6'>
+                    <div className='relative ml-4 flex flex-1 flex-col justify-between sm:ml-6'>
                       <div>
-                        <div className='flex justify-between'>
-                          <h4 className='text-sm'>
-                            <a
-                              href={'/#'} //product.href
+                        <div className='flex justify-between sm:grid sm:grid-cols-2'>
+                          <div className='pr-6'>
+                            <h3 className='text-sm'>
+                              {/* <a
+                              href={product.href}
                               className='font-medium text-gray-700 hover:text-gray-800'
-                            >
+                            > */}
                               {item.product}
-                            </a>
-                          </h4>
-                          <p className='ml-4 text-sm font-medium text-gray-900'>
+                              {/* </a> */}
+                            </h3>
+                            {/* <p className='mt-1 text-sm text-gray-500'>
+                            {product.color}
+                          </p> */}
+                            {item.weight ? (
+                              <p className='mt-1 text-sm text-gray-500'>
+                                {item.weight} oz
+                              </p>
+                            ) : null}
+                          </div>
+
+                          <p className='text-right text-sm font-medium text-gray-900'>
                             {renderPrice(item.price)}
                           </p>
                         </div>
-                        {/* <p className='mt-1 text-sm text-gray-500'>
-                        {product.color}
-                      </p> */}
-                        <p className='mt-1 text-sm text-gray-500'>
-                          {item.weight} oz
-                        </p>
-                      </div>
 
-                      <div className='mt-4 flex flex-1 items-end justify-between'>
-                        {/* <p className='flex items-center space-x-2 text-sm text-gray-700'>
-                        {product.inStock ? (
-                          <CheckIcon
-                            className='h-5 w-5 flex-shrink-0 text-green-500'
-                            aria-hidden='true'
-                          />
-                        ) : (
-                          <ClockIcon
-                            className='h-5 w-5 flex-shrink-0 text-gray-300'
-                            aria-hidden='true'
-                          />
-                        )}
+                        <div className='mt-4 flex items-center sm:absolute sm:top-0 sm:left-1/2 sm:mt-0 sm:block'>
+                          <label
+                            htmlFor={`quantity-${productIdx}`}
+                            className='sr-only'
+                          >
+                            Quantity, {item.product}
+                          </label>
+                          <select
+                            id={`quantity-${productIdx}`}
+                            name={`quantity-${productIdx}`}
+                            className='block max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm'
+                          >
+                            <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                            <option value={6}>6</option>
+                            <option value={7}>7</option>
+                            <option value={8}>8</option>
+                          </select>
 
-                        <span>
-                          {product.inStock
-                            ? 'In stock'
-                            : `Will ship in ${product.leadTime}`}
-                        </span>
-                      </p> */}
-                        <div className='ml-4'>
                           <button
                             type='button'
-                            className='text-sm font-medium text-indigo-600 hover:text-indigo-500'
+                            className='ml-4 text-sm font-medium text-indigo-600 hover:text-indigo-500 sm:ml-0 sm:mt-3'
                           >
                             <span>Remove</span>
                           </button>
                         </div>
                       </div>
+
+                      {/* <p className='mt-4 flex space-x-2 text-sm text-gray-700'>
+                      {product.inStock ? (
+                        <CheckIcon
+                          className='h-5 w-5 flex-shrink-0 text-green-500'
+                          aria-hidden='true'
+                        />
+                      ) : (
+                        <ClockIcon
+                          className='h-5 w-5 flex-shrink-0 text-gray-300'
+                          aria-hidden='true'
+                        />
+                      )}
+
+                      <span>
+                        {product.inStock
+                          ? 'In stock'
+                          : `Ships in ${product.leadTime}`}
+                      </span>
+                    </p> */}
                     </div>
                   </li>
                 ))}
             </ul>
-          </section>
+          </div>
 
           {/* Order summary */}
           <section aria-labelledby='summary-heading' className='mt-10'>
@@ -199,7 +223,7 @@ const CheckoutForm = () => {
 
             <div className='mt-6 text-center text-sm'>
               <p>
-                or
+                or {''}
                 <a
                   href='#'
                   className='font-medium text-indigo-600 hover:text-indigo-500'
