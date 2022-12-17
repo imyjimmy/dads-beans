@@ -4,6 +4,8 @@ import { Amplify } from 'aws-amplify'
 import { UserProvider } from '../lib/UserProvider'
 import { useFetchUser } from '../lib/user'
 
+import { ShoppingCartProvider } from '@/components/ShoppingCartContext'
+
 import '@/styles/globals.css'
 // !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 // import '@/styles/colors.css';
@@ -28,7 +30,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       {/* {console.log('user from useFetchUser', user)} */}
       <UserProvider value={user}>
-        <Component {...pageProps} />
+        <ShoppingCartProvider>
+          <Component {...pageProps} />
+        </ShoppingCartProvider>
       </UserProvider>
     </>
   )

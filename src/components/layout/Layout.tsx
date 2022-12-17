@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import Head from 'next/head'
 
 // import UnderConstruction from './UnderConstruction'
+import Seo from '@/components/Seo'
 import Header from './Header'
 import Footer from './Footer'
 
@@ -22,9 +23,15 @@ const Layout = ({ children, title = "Dad's Beans!", currentPage }: Props) => (
       <link rel='icon' type='image/png' sizes='32x32' href='/favicon.png' />
       {/* <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" /> */}
     </Head>
+    {/* <Seo /> */}
     {/* <UnderConstruction /> */}
     <Header currentPage={currentPage} />
-    <div className='flex-1'>{children}</div>
+    <div className='flex-1 bg-white'>
+      <div className='mx-auto max-w-7xl bg-white sm:px-6 lg:px-8'>
+        {children}
+      </div>
+    </div>
+
     <Footer />
   </div>
 )

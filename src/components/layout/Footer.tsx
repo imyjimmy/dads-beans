@@ -45,7 +45,7 @@ const Footer = () => {
               {/* <Logo style={{ height: '64px', width: '64px'}}/> */}
               <div className='mt-2 text-2xl text-white'>Dad's Beans</div>
             </div>
-            <div
+            {/* <div
               className={`${FooterStyle.footer__text} mt-3 max-w-xl text-sm tracking-wide antialiased lg:max-w-lg`}
             >
               <p>
@@ -84,7 +84,7 @@ const Footer = () => {
                 another business with follow-your-dreams messaging, it wouldn't
                 stand out.
               </p>
-            </div>
+            </div> */}
           </div>
           <div className='col-span-12 sm:col-span-6 lg:col-span-3'>
             <div className='text-md font-bold text-gray-200'>

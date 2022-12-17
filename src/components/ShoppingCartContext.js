@@ -13,10 +13,23 @@ const useShoppingCart = () => useContext(ShoppingCartContext)
 */
 
 const ShoppingCartProvider = ({ children }) => {
-  const [cart, setCart] = useState()
+  let localCart
+
+  if (typeof window !== 'undefined') {
+    localCart = JSON.parse(localStorage.getItem('localCart'))
+  }
+
+  const [_cart, setCart] = useState(localCart)
+
+  useEffect(() => {
+    console.log('setting cart')
+    if (_cart && _cart.length != 0) {
+      localStorage.setItem('localCart', JSON.stringify(_cart))
+    }
+  }, [_cart])
 
   const values = {
-    cart,
+    _cart,
     setCart,
   }
 

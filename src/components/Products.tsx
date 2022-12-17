@@ -15,7 +15,7 @@ type PriceVariant = {
   price: number
 }
 
-type Pictures = {
+type Picture = {
   fileName: string
   url: string
 }
@@ -28,7 +28,8 @@ type Product = {
   roastDate: string
   roastLevel: string
   priceVariants: PriceVariant[]
-  pictures: Pictures[]
+  pictures: Picture[]
+  thumbnail: Picture
 }
 
 type Props = {
@@ -42,7 +43,9 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-/* toast */
+/* toast 
+  src: https://dev.to/franciscomendes10866/how-to-create-a-notificationtoast-using-react-and-tailwind-545o
+*/
 const notify = (): string =>
   toast.custom(
     (t) => (
@@ -71,45 +74,65 @@ type CartItem = {
   product: string
   quantity: number
   weight: number
+  price: number
+  thumbnail: string
 }
 
 const Products = ({ products }: Props) => {
   // probably a hack but its data about the product!!
   const [product, setProduct] = useState<Product>()
 
-  const [weight, setWeight] = useState<number>()
+  const [priceVariant, setPriceVariant] = useState<PriceVariant>()
+  //const [weight, setWeight] = useState<number>(12)
   const [quantity, setQuantity] = useState<number | undefined>(1)
 
-  const { cart, setCart } = useShoppingCart()
+  const { _cart, setCart } = useShoppingCart()
 
   const onSubmit = (event: FormEvent): void => {
     event.preventDefault()
     try {
-      if (!weight) {
+      if (!priceVariant) {
         throw 'selet a size!'
       }
-      if (cart) {
-        let cartItem = cart.filter(
+      if (_cart) {
+        let cartItem = _cart.filter(
           (item: CartItem) =>
-            product?.title === item.product && weight === item.weight
-        )
+            product?.title === item.product &&
+            priceVariant.weight === item.weight
+        ) // we look for a particular cartItem...
 
         if (cartItem.length > 1) {
           throw 'cart has a duplicate item'
         }
-        cartItem = cartItem[0]
+        cartItem = cartItem[0] // by the end of filter and throw ops, there is only one item in cartItem, so can safely re-assign
 
         setCart([
-          ...cart.filter(
+          ..._cart.filter(
             (item: CartItem) =>
-              product?.title !== item.product || weight !== item.weight // we keep the item without updating it
+              product?.title !== item.product ||
+              priceVariant.weight !== item.weight // we keep these cart items without updating it as they dont match the current item being updated
           ),
           cartItem
-            ? { ...cartItem, quantity: cartItem.quantity + quantity }
-            : { product: product?.title, weight, quantity },
+            ? { ...cartItem, quantity: cartItem.quantity + quantity } // the matching cartItem exist already so update its quantity
+            : {
+                // there is no matching cartItem so make a fresh item in the cart
+                product: product!.title,
+                weight: priceVariant.weight,
+                price: priceVariant.price,
+                thumbnail: product!.thumbnail.url,
+                quantity,
+              },
         ])
       } else {
-        setCart([{ product: product?.title, weight, quantity }])
+        setCart([
+          {
+            product: product?.title,
+            weight: priceVariant.weight,
+            quantity,
+            price: priceVariant.price,
+            thumbnail: product!.thumbnail.url,
+          },
+        ])
       }
       notify()
     } catch (e) {
@@ -130,6 +153,7 @@ const Products = ({ products }: Props) => {
   useEffect(() => {
     if (products && products.length > 0) {
       setProduct(products[0])
+      setPriceVariant(products[0].priceVariants[0])
     }
   }, [products])
 
@@ -139,9 +163,8 @@ const Products = ({ products }: Props) => {
   return (
     <>
       {/* {console.log('products!:', products[0])} */}
-      {console.log('cart: ', cart)}
+      {console.log('cart: ', _cart)}
       <Toaster />
-      <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'></div>
       <div className='bg-white'>
         <div className='pt-6'>
           {/* Image gallery */}
@@ -179,7 +202,7 @@ const Products = ({ products }: Props) => {
           </div>
 
           {/* Product info */}
-          <div className='mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24'>
+          <div className='mx-auto max-w-2xl px-4 pt-10 pb-16 text-left sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24'>
             <div className='lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8'>
               <h1 className='text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl'>
                 {product?.title}
@@ -190,14 +213,16 @@ const Products = ({ products }: Props) => {
             <div className='mt-4 lg:row-span-3 lg:mt-0'>
               <h2 className='sr-only'>Product information</h2>
               <p className='text-3xl tracking-tight text-gray-900'>
-                {weight
-                  ? renderPrice(
-                      product!.priceVariants.filter(
-                        (variant) => variant.weight == weight
-                      )[0].price
-                    )
-                  : renderPrice(product!.priceVariants[0]!.price)}{' '}
-                | {weight ?? product!.priceVariants[0]!.weight} oz
+                {priceVariant ? (
+                  <>
+                    {renderPrice(priceVariant.price)} | {priceVariant.weight} oz
+                  </>
+                ) : (
+                  <>
+                    {renderPrice(product!.priceVariants[0]!.price)} |{' '}
+                    {product!.priceVariants[0]!.weight} oz
+                  </>
+                )}
               </p>
 
               <form className='mt-10' onSubmit={onSubmit}>
@@ -208,8 +233,8 @@ const Products = ({ products }: Props) => {
                   </div>
 
                   <RadioGroup
-                    value={weight}
-                    onChange={setWeight}
+                    value={priceVariant}
+                    onChange={setPriceVariant}
                     className='mt-4'
                   >
                     <RadioGroup.Label className='sr-only'>
@@ -220,7 +245,7 @@ const Products = ({ products }: Props) => {
                       {product!.priceVariants!.map((priceVariant) => (
                         <RadioGroup.Option
                           key={priceVariant.weight}
-                          value={priceVariant.weight}
+                          value={priceVariant}
                           // disabled={!size.inStock}
                           className={({ active }) =>
                             classNames(
