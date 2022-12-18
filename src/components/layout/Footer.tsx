@@ -13,14 +13,6 @@ const informations = [
     title: 'Contact us',
     href: '/contact',
   },
-  {
-    title: 'FAQ',
-    href: '/faq',
-  },
-  {
-    title: 'Press & Media',
-    href: '/press',
-  },
 ]
 
 const legal = [
@@ -36,14 +28,14 @@ const legal = [
 
 const Footer = () => {
   return (
-    <footer className='bg-gray-900'>
+    <footer className='bg-yellow-900'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-12 gap-8 py-20'>
           <div className='col-span-12 lg:col-span-6'>
             <div>
               {/* <img className="h-12" src="/images/logo.png" alt="bitcoin logo" /> */}
               {/* <Logo style={{ height: '64px', width: '64px'}}/> */}
-              <div className='mt-2 text-2xl text-white'>Dad's Beans</div>
+              <div className='mt-2 text-2xl text-gray-200'>Dad's Beans</div>
             </div>
             {/* <div
               className={`${FooterStyle.footer__text} mt-3 max-w-xl text-sm tracking-wide antialiased lg:max-w-lg`}

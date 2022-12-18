@@ -167,6 +167,11 @@ const Products = ({ products }: Props) => {
       <Toaster />
       <div className='bg-white'>
         <div className='pt-6'>
+          <div className='ml-8 text-left lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8'>
+            <h1 className='text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl'>
+              {product?.title}
+            </h1>
+          </div>
           {/* Image gallery */}
           <div className='mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8'>
             <div className='aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block'>
@@ -202,11 +207,25 @@ const Products = ({ products }: Props) => {
           </div>
 
           {/* Product info */}
-          <div className='mx-auto max-w-2xl px-4 pt-10 pb-16 text-left sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24'>
-            <div className='lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8'>
-              <h1 className='text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl'>
-                {product?.title}
-              </h1>
+          <div className='mx-auto max-w-2xl px-4 pt-4 pb-16 text-left sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-10 lg:pb-24'>
+            <div className='lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8'>
+              {/* Description and details */}
+              <div>
+                <h3 className='text-xl'>{product?.subtitle}</h3>
+                <h3 className='sr-only'>Description</h3>
+                <div className='mt-4 flex flex-col space-y-8'>
+                  <div className='text-base text-gray-900'>
+                    <RichText
+                      content={product!.description.raw}
+                      renderers={{
+                        h4: ({ children }) => (
+                          <h4 className='my-2'>{children}</h4>
+                        ),
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Options */}
@@ -309,27 +328,6 @@ const Products = ({ products }: Props) => {
                   Add to Cart
                 </button>
               </form>
-            </div>
-
-            <div className='py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8'>
-              {/* Description and details */}
-              <div>
-                <h3 className='text-xl'>{product?.subtitle}</h3>
-                <h3 className='sr-only'>Description</h3>
-
-                <div className='mt-4 flex flex-col space-y-8'>
-                  <div className='text-base text-gray-900'>
-                    <RichText
-                      content={product!.description.raw}
-                      renderers={{
-                        h4: ({ children }) => (
-                          <h4 className='my-2'>{children}</h4>
-                        ),
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
