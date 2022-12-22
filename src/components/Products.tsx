@@ -18,6 +18,7 @@ type PriceVariant = {
 type Picture = {
   fileName: string
   url: string
+  alt?: string
 }
 
 type Product = {
@@ -71,6 +72,7 @@ const notify = (): string =>
   )
 
 type CartItem = {
+  id: string
   product: string
   quantity: number
   weight: number
@@ -91,8 +93,8 @@ const Products = ({ products }: Props) => {
   const onSubmit = (event: FormEvent): void => {
     event.preventDefault()
     try {
-      if (!priceVariant) {
-        throw 'selet a size!'
+      if (!priceVariant || !product) {
+        throw 'select a product or a size!'
       }
       if (_cart) {
         let cartItem = _cart.filter(
@@ -116,7 +118,8 @@ const Products = ({ products }: Props) => {
             ? { ...cartItem, quantity: cartItem.quantity + quantity } // the matching cartItem exist already so update its quantity
             : {
                 // there is no matching cartItem so make a fresh item in the cart
-                product: product!.title,
+                product: product.title,
+                id: product.id,
                 weight: priceVariant.weight,
                 price: priceVariant.price,
                 thumbnail: product!.thumbnail.url,
@@ -126,7 +129,8 @@ const Products = ({ products }: Props) => {
       } else {
         setCart([
           {
-            product: product?.title,
+            product: product.title,
+            id: product.id,
             weight: priceVariant.weight,
             quantity,
             price: priceVariant.price,

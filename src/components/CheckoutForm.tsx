@@ -42,9 +42,22 @@ const CheckoutForm = () => {
     setCart(_cart)
     let price = 0
     console.log('hey')
-    _cart.map((item: CartItem) => (price += item.price))
+    if (_cart) {
+      _cart.map((item: CartItem) => (price += item.price))
+    }
     setSubTotalPrice(price)
+
+    const fetch = async () => {
+      const cartValidation = await fetchPostJSON(
+        '/api/checkout_sessions/cart',
+        _cart
+      )
+    }
+    fetch()
+    console.log('fetch: ', fetch)
   }, [_cart])
+
+  useEffect(() => {})
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) =>
     setInput({
@@ -55,6 +68,19 @@ const CheckoutForm = () => {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     setLoading(true)
+
+    const cartValidation = await fetchPostJSON(
+      '/api/checkout_sessions/cart',
+      _cart
+    )
+
+    // if (response.statusCode > 399) {
+    //   console.error(response.message)
+    //   setErrorMessage(response.message)
+    //   setLoading(false)
+    //   return
+    // }
+
     // Create a Checkout Session.
     const response = await fetchPostJSON('/api/checkout_sessions', {
       amount: subTotalPrice / 100,

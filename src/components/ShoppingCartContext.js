@@ -7,6 +7,7 @@ const useShoppingCart = () => useContext(ShoppingCartContext)
   Cart: CartItem[]
   CartItem: {
     product: string
+    id: string
     quantity: number
     user?
   }

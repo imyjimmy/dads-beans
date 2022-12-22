@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 import Layout from '@/components/layout/Layout'
 import CheckoutForm from '@/components/CheckoutForm'
 
-const DonatePage: NextPage = () => {
+const CartPage: NextPage = () => {
   return (
     <Layout title='Cart'>
       <div className='page-container'>
@@ -12,4 +12,4 @@ const DonatePage: NextPage = () => {
   )
 }
 
-export default DonatePage
+export default CartPage
