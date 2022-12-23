@@ -3,8 +3,7 @@ import { getEnv } from '../lib/vars'
 import { Amplify } from 'aws-amplify'
 import { UserProvider } from '../lib/UserProvider'
 import { useFetchUser } from '../lib/user'
-
-import { ShoppingCartProvider } from '@/components/ShoppingCartContext'
+import { CartProvider } from 'use-shopping-cart'
 
 import '@/styles/globals.css'
 // !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
@@ -25,15 +24,21 @@ Amplify.configure({
 })
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { user, loading } = useFetchUser()
+  // const { user, loading } = useFetchUser()
   return (
     <>
       {/* {console.log('user from useFetchUser', user)} */}
-      <UserProvider value={user}>
-        <ShoppingCartProvider>
-          <Component {...pageProps} />
-        </ShoppingCartProvider>
-      </UserProvider>
+      {/* <UserProvider value={user}> */}
+      <CartProvider
+        cartMode='checkout-session'
+        stripe={process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!}
+        currency='USD'
+        shouldPersist={true}
+        loading={<p aria-live='polite'>Loading redux-persist...</p>}
+      >
+        <Component {...pageProps} />
+      </CartProvider>
+      {/* </UserProvider> */}
     </>
   )
 }

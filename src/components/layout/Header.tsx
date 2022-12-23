@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import { useUser } from '../../lib/UserProvider'
+// import { useUser } from '../../lib/UserProvider'
 import styles from './Header.module.css'
 import { ShoppingBagIcon } from '@heroicons/react/outline'
 
@@ -32,7 +32,8 @@ function classNames(...classes: string[]) {
 
 const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
   const router = useRouter()
-  const { user } = useUser()
+  // const { user } = useUser()
+  const user = undefined
 
   const loggedInLinks = [
     { href: '/#', text: 'test' },
