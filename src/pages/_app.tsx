@@ -27,8 +27,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   // const { user, loading } = useFetchUser()
   return (
     <>
-      {/* {console.log('user from useFetchUser', user)} */}
-      {/* <UserProvider value={user}> */}
       <CartProvider
         cartMode='checkout-session'
         stripe={process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!}
@@ -38,7 +36,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       >
         <Component {...pageProps} />
       </CartProvider>
-      {/* </UserProvider> */}
     </>
   )
 }

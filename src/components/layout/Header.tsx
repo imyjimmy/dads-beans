@@ -119,7 +119,7 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
                           */}
                             <span className='inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-500'>
                               <span className='text-xs font-medium leading-none text-white'>
-                                {user.username[0].toUpperCase()}
+                                {/* {user.username[0].toUpperCase()} */}
                               </span>
                               {/* {userBio && userBio.profile_pic && (
                                 <img
@@ -156,7 +156,7 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
                                       key='0'
                                       className='my-2 truncate py-2 text-base hover:bg-gray-50'
                                     >
-                                      <Link
+                                      {/* <Link
                                         href={`/profile/${encodeURIComponent(
                                           user.sub
                                         )}`}
@@ -164,7 +164,7 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
                                         <a className='font-medium text-gray-900 hover:text-gray-700'>
                                           Profile
                                         </a>
-                                      </Link>
+                                      </Link> */}
                                     </li>
                                     <li
                                       key='1'

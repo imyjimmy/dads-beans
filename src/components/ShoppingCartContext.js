@@ -23,7 +23,6 @@ const ShoppingCartProvider = ({ children }) => {
   const [_cart, setCart] = useState(localCart)
 
   useEffect(() => {
-    console.log('setting cart')
     if (_cart && _cart.length != 0) {
       localStorage.setItem('localCart', JSON.stringify(_cart))
     }

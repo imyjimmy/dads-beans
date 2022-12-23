@@ -52,7 +52,6 @@ export default async function handler(
         }
       )
 
-      console.log('validProducts:', validProducts)
       // Validate the cart details that were sent from the client.
       const line_items = validateCartItems(
         validProducts.products as any,
@@ -61,7 +60,6 @@ export default async function handler(
       // const hasSubscription = line_items.find((item) => {
       //   return !!item.price_data.recurring
       // })
-      console.log('product_data:', line_items[0].price_data.product_data)
 
       // Create Checkout Sessions from body params.
       const params: Stripe.Checkout.SessionCreateParams = {
@@ -77,13 +75,12 @@ export default async function handler(
         mode: 'payment', // hasSubscription ? 'subscription' :
       }
 
-      console.log('params:', params)
       const checkoutSession: Stripe.Checkout.Session =
         await stripe.checkout.sessions.create(params)
 
       res.status(200).json(checkoutSession)
     } catch (err) {
-      console.log(err)
+      console.error(err)
       const errorMessage =
         err instanceof Error ? err.message : 'Internal server error'
       res.status(500).json({ statusCode: 500, message: errorMessage })

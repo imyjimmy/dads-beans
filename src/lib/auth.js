@@ -5,7 +5,7 @@ export const checkUserStatus = async () => {
     const user = await Auth.currentAuthenticatedUser()
     return user
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 
@@ -32,13 +32,11 @@ export const signUp = async (username, password) => {
   }
 
   try {
-    console.log('username:', username, ' password:', password)
     const { user } = await Auth.signUp({
       username,
       password,
       attributes: userAttributes,
     })
-    console.log('user:', user)
     return user
   } catch (error) {
     throw new Error(error)
@@ -52,7 +50,7 @@ export async function answerCustomChallenge(cognitoUser, code) {
     await Auth.currentSession()
     return answerResponse
   } catch (error) {
-    console.log('Apparently the user did not enter the right code', error)
+    console.error('Apparently the user did not enter the right code', error)
   }
 }
 
@@ -60,7 +58,7 @@ export const signOut = async () => {
   try {
     await Auth.signOut()
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 
@@ -68,6 +66,6 @@ export const globalSignOut = async () => {
   try {
     await Auth.signOut({ global: true })
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }

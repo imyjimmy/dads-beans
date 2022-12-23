@@ -22,14 +22,6 @@ function validateCartItems(inventorySrc, cartDetails) {
         `Invalid Cart: product with id "${id}" is not in your inventory or does not have a valid price.`
       )
     }
-    console.log(
-      'inventory item: ',
-      inventoryItem,
-      'cartDetails: ',
-      cartDetails,
-      'inventoryVariant: ',
-      inventoryVariant
-    )
 
     inventoryVariant = inventoryVariant[0]
 
@@ -46,7 +38,6 @@ function validateCartItems(inventorySrc, cartDetails) {
       quantity: cartDetails[id].quantity,
     }
 
-    console.log('item: ', item)
     if (
       cartDetails[id].product_data &&
       typeof cartDetails[id].product_data.metadata === 'object'
@@ -71,7 +62,6 @@ function validateCartItems(inventorySrc, cartDetails) {
 
     validatedItems.push(item)
   }
-  console.log('validated items product_data: ', validatedItems.product_data)
   return validatedItems
 }
 

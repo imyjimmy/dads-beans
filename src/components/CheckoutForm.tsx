@@ -81,7 +81,7 @@ const CheckoutForm = () => {
             >
               {cartDetails &&
                 Object.keys(cartDetails).map((key: string, index: number) => {
-                  let price_data: { weight: string } = cartDetails[key]
+                  const price_data: { weight: string } = cartDetails[key]
                     .price_data as { weight: string }
                   return (
                     <li key={index} className='flex py-6 sm:py-10'>

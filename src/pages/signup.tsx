@@ -43,7 +43,6 @@ const SignUp: React.FC<Props> = (): ReactElement => {
     event.preventDefault()
     try {
       const user = await signUp(email, password)
-      console.log('user:', user)
       setUser(user)
     } catch (error) {
       console.error(error)
@@ -80,7 +79,6 @@ const SignUp: React.FC<Props> = (): ReactElement => {
         {user ? (
           <>
             <div>username from UserProvider: {user.username}</div>
-            {console.log('user from UserProvider:', user)}
           </>
         ) : (
           <></>

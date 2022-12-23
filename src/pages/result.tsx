@@ -35,7 +35,6 @@ const ResultPage: NextPage = () => {
 
   return (
     <>
-      {console.log('data:', data, 'error:', error)}
       <Layout title='Checkout Payment Result | Next.js + TypeScript Example'>
         <div className='page-container'>
           <h1>Checkout Payment Result</h1>

@@ -16,13 +16,11 @@ const UserProvider = ({ value, children }) => {
         localUser = JSON.parse(_user)
       }
     }
-    // console.log('localuser', localUser)
     setUser(localUser)
   }, [])
 
   useEffect(() => {
     if (user !== undefined) {
-      // console.log('user setItem:', user)
       localStorage.setItem('user', JSON.stringify(user))
     }
   }, [user])
