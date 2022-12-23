@@ -1,41 +1,14 @@
 import { FormEvent, useState, useEffect } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { RichText } from '@graphcms/rich-text-react-renderer'
-import { ElementNode } from '@graphcms/rich-text-types'
 import { renderPrice } from '@/lib/utils'
 
 import toast, { Toaster } from 'react-hot-toast'
 import styles from '@/styles/products.module.css'
 import { ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
+import { useShoppingCart } from 'use-shopping-cart'
 
-import { useShoppingCart } from '@/components/ShoppingCartContext'
-
-type PriceVariant = {
-  weight: number
-  price: number
-}
-
-type Picture = {
-  fileName: string
-  url: string
-  alt?: string
-}
-
-type Product = {
-  id: string
-  title: string
-  subtitle: string
-  description: { raw: { children: ElementNode[] } }
-  roastDate: string
-  roastLevel: string
-  priceVariants: PriceVariant[]
-  pictures: Picture[]
-  thumbnail: Picture
-}
-
-type Props = {
-  products: Product[]
-}
+import { Product, PriceVariant, Props } from '@/lib/types'
 
 // a pretend data structure called reviews
 // const reviews = { href: '#', average: 4, totalCount: 117 }
@@ -44,9 +17,10 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-/* toast 
-  src: https://dev.to/franciscomendes10866/how-to-create-a-notificationtoast-using-react-and-tailwind-545o
-*/
+/*
+ *  Toast
+ *  src: https://dev.to/franciscomendes10866/how-to-create-a-notificationtoast-using-react-and-tailwind-545o
+ */
 const notify = (): string =>
   toast.custom(
     (t) => (
@@ -88,70 +62,30 @@ const Products = ({ products }: Props) => {
   //const [weight, setWeight] = useState<number>(12)
   const [quantity, setQuantity] = useState<number | undefined>(1)
 
-  const { _cart, setCart } = useShoppingCart()
+  const { addItem } = useShoppingCart()
 
   const onSubmit = (event: FormEvent): void => {
     event.preventDefault()
+    console.log('event:', event)
     try {
-      if (!priceVariant || !product) {
-        throw 'select a product or a size!'
-      }
-      if (_cart) {
-        let cartItem = _cart.filter(
-          (item: CartItem) =>
-            product?.title === item.product &&
-            priceVariant.weight === item.weight
-        ) // we look for a particular cartItem...
-
-        if (cartItem.length > 1) {
-          throw 'cart has a duplicate item'
-        }
-        cartItem = cartItem[0] // by the end of filter and throw ops, there is only one item in cartItem, so can safely re-assign
-
-        setCart([
-          ..._cart.filter(
-            (item: CartItem) =>
-              product?.title !== item.product ||
-              priceVariant.weight !== item.weight // we keep these cart items without updating it as they dont match the current item being updated
-          ),
-          cartItem
-            ? { ...cartItem, quantity: cartItem.quantity + quantity } // the matching cartItem exist already so update its quantity
-            : {
-                // there is no matching cartItem so make a fresh item in the cart
-                product: product.title,
-                id: product.id,
-                weight: priceVariant.weight,
-                price: priceVariant.price,
-                thumbnail: product!.thumbnail.url,
-                quantity,
-              },
-        ])
-      } else {
-        setCart([
+      if (product && priceVariant && quantity) {
+        addItem(
           {
-            product: product.title,
+            name: product.name,
             id: product.id,
-            weight: priceVariant.weight,
-            quantity,
             price: priceVariant.price,
-            thumbnail: product!.thumbnail.url,
+            currency: 'USD',
+            image: product.thumbnail.url,
           },
-        ])
+          { count: quantity, price_metadata: { weight: priceVariant.weight } }
+        )
+        notify()
+      } else {
+        throw 'product or variant not set!'
       }
-      notify()
     } catch (e) {
       console.error(e)
     }
-
-    /*
-                                                cart.title !=     cart.weight !=
-  Cart:                   Item:                 item.title ?      item.weight ?
-    December Roast          December Roast      false             true
-    12 oz                   16 oz
-
-    December Roast                              false             false
-    16 oz
-  */
   }
 
   useEffect(() => {
@@ -166,14 +100,12 @@ const Products = ({ products }: Props) => {
   }
   return (
     <>
-      {/* {console.log('products!:', products[0])} */}
-      {console.log('cart: ', _cart)}
       <Toaster />
       <div className='bg-white'>
         <div className='pt-6'>
           <div className='ml-8 text-left lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8'>
             <h1 className='text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl'>
-              {product?.title}
+              {product?.name}
             </h1>
           </div>
           {/* Image gallery */}

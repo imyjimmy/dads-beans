@@ -5,7 +5,7 @@ const query = gql`
   {
     products {
       id
-      title
+      name
       subtitle
       priceVariants {
         weight
@@ -54,30 +54,34 @@ export default async function handler(
 
       console.log('validProducts:', validProducts)
       // Validate the cart details that were sent from the client.
-      // const line_items = validateCartItems(validProducts as any, req.body)
+      const line_items = validateCartItems(
+        validProducts.products as any,
+        req.body
+      )
       // const hasSubscription = line_items.find((item) => {
       //   return !!item.price_data.recurring
       // })
+      console.log('product_data:', line_items[0].price_data.product_data)
 
       // Create Checkout Sessions from body params.
-      // const params: Stripe.Checkout.SessionCreateParams = {
-      //   submit_type: 'pay',
-      //   payment_method_types: ['card'],
-      //   billing_address_collection: 'auto',
-      //   shipping_address_collection: {
-      //     allowed_countries: ['US', 'CA'],
-      //   },
-      //   line_items,
-      //   success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
-      //   cancel_url: `${req.headers.origin}/use-shopping-cart`,
-      //   mode: 'payment', // hasSubscription ? 'subscription' :
-      // }
+      const params: Stripe.Checkout.SessionCreateParams = {
+        submit_type: 'pay',
+        payment_method_types: ['card'],
+        billing_address_collection: 'auto',
+        shipping_address_collection: {
+          allowed_countries: ['US', 'CA'],
+        },
+        line_items,
+        success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${req.headers.origin}/use-shopping-cart`,
+        mode: 'payment', // hasSubscription ? 'subscription' :
+      }
 
-      // const checkoutSession: Stripe.Checkout.Session =
-      //   await stripe.checkout.sessions.create(params)
+      console.log('params:', params)
+      const checkoutSession: Stripe.Checkout.Session =
+        await stripe.checkout.sessions.create(params)
 
-      // res.status(200).json(checkoutSession)
-      res.status(200)
+      res.status(200).json(checkoutSession)
     } catch (err) {
       console.log(err)
       const errorMessage =

@@ -8,25 +8,45 @@ function validateCartItems(inventorySrc, cartDetails) {
     const inventoryItem = inventorySrc.find((currentProduct) => {
       return currentProduct.id === id || currentProduct.sku === id
     })
-    if (inventoryItem === undefined) {
+
+    let inventoryVariant = inventoryItem.priceVariants.filter(
+      (variant) => variant.weight === cartDetails[id].price_data.weight
+    )
+
+    if (
+      inventoryItem === undefined ||
+      inventoryVariant.length != 1 ||
+      inventoryVariant[0].price != cartDetails[id].price
+    ) {
       throw new Error(
-        `Invalid Cart: product with id "${id}" is not in your inventory.`
+        `Invalid Cart: product with id "${id}" is not in your inventory or does not have a valid price.`
       )
     }
+    console.log(
+      'inventory item: ',
+      inventoryItem,
+      'cartDetails: ',
+      cartDetails,
+      'inventoryVariant: ',
+      inventoryVariant
+    )
+
+    inventoryVariant = inventoryVariant[0]
 
     const item = {
       price_data: {
-        currency: inventoryItem.currency,
-        unit_amount: inventoryItem.price,
+        currency: 'USD',
+        unit_amount: inventoryItem.price || inventoryVariant.price,
         product_data: {
           name: inventoryItem.name,
           ...inventoryItem.product_data,
         },
-        ...inventoryItem.price_data,
+        ...cartDetails.price_data,
       },
       quantity: cartDetails[id].quantity,
     }
 
+    console.log('item: ', item)
     if (
       cartDetails[id].product_data &&
       typeof cartDetails[id].product_data.metadata === 'object'
@@ -51,7 +71,7 @@ function validateCartItems(inventorySrc, cartDetails) {
 
     validatedItems.push(item)
   }
-
+  console.log('validated items product_data: ', validatedItems.product_data)
   return validatedItems
 }
 

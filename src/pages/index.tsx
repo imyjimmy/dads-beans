@@ -21,7 +21,7 @@ export async function getStaticProps() {
       query {
         products {
           id
-          title
+          name
           subtitle
           description {
             raw
@@ -35,10 +35,12 @@ export async function getStaticProps() {
           pictures {
             fileName
             url
+            alt
           }
           thumbnail {
             fileName
             url
+            alt
           }
         }
       }
