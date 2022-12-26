@@ -41,6 +41,176 @@
       U+2215, U+FEFF, U+FFFD;
   }
 
+  @font-face {
+    font-family: 'Recoleta Alt';
+    src: url('./font/RecoletaAlt-Thin.eot');
+    src: local('Recoleta Alt Thin'), local('RecoletaAlt-Thin'),
+        url('./font/RecoletaAlt-Thin.eot?#iefix') format('embedded-opentype'),
+        url('./font/RecoletaAlt-Thin.woff2') format('woff2'),
+        url('./font/RecoletaAlt-Thin.woff') format('woff'),
+        url('./font/RecoletaAlt-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta';
+    src: url('./font/Recoleta-Medium.eot');
+    src: local('Recoleta Medium'), local('Recoleta-Medium'),
+        url('./font/Recoleta-Medium.eot?#iefix') format('embedded-opentype'),
+        url('./font/Recoleta-Medium.woff2') format('woff2'),
+        url('./font/Recoleta-Medium.woff') format('woff'),
+        url('./font/Recoleta-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta Alt';
+    src: url('./font/RecoletaAlt-SemiBold.eot');
+    src: local('Recoleta Alt SemiBold'), local('RecoletaAlt-SemiBold'),
+        url('./font/RecoletaAlt-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('./font/RecoletaAlt-SemiBold.woff2') format('woff2'),
+        url('./font/RecoletaAlt-SemiBold.woff') format('woff'),
+        url('./font/RecoletaAlt-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta Alt';
+    src: url('./font/RecoletaAlt-Medium.eot');
+    src: local('Recoleta Alt Medium'), local('RecoletaAlt-Medium'),
+        url('./font/RecoletaAlt-Medium.eot?#iefix') format('embedded-opentype'),
+        url('./font/RecoletaAlt-Medium.woff2') format('woff2'),
+        url('./font/RecoletaAlt-Medium.woff') format('woff'),
+        url('./font/RecoletaAlt-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta Alt';
+    src: url('./font/RecoletaAlt-Regular.eot');
+    src: local('Recoleta Alt Regular'), local('RecoletaAlt-Regular'),
+        url('./font/RecoletaAlt-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./font/RecoletaAlt-Regular.woff2') format('woff2'),
+        url('./font/RecoletaAlt-Regular.woff') format('woff'),
+        url('./font/RecoletaAlt-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta';
+    src: url('./font/Recoleta-Thin.eot');
+    src: local('Recoleta Thin'), local('Recoleta-Thin'),
+        url('./font/Recoleta-Thin.eot?#iefix') format('embedded-opentype'),
+        url('./font/Recoleta-Thin.woff2') format('woff2'),
+        url('./font/Recoleta-Thin.woff') format('woff'),
+        url('./font/Recoleta-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta Alt';
+    src: url('./font/RecoletaAlt-Bold.eot');
+    src: local('Recoleta Alt Bold'), local('RecoletaAlt-Bold'),
+        url('./font/RecoletaAlt-Bold.eot?#iefix') format('embedded-opentype'),
+        url('./font/RecoletaAlt-Bold.woff2') format('woff2'),
+        url('./font/RecoletaAlt-Bold.woff') format('woff'),
+        url('./font/RecoletaAlt-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta Alt';
+    src: url('./font/RecoletaAlt-Black.eot');
+    src: local('Recoleta Alt Black'), local('RecoletaAlt-Black'),
+        url('./font/RecoletaAlt-Black.eot?#iefix') format('embedded-opentype'),
+        url('./font/RecoletaAlt-Black.woff2') format('woff2'),
+        url('./font/RecoletaAlt-Black.woff') format('woff'),
+        url('./font/RecoletaAlt-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta Alt';
+    src: url('./font/RecoletaAlt-Light.eot');
+    src: local('Recoleta Alt Light'), local('RecoletaAlt-Light'),
+        url('./font/RecoletaAlt-Light.eot?#iefix') format('embedded-opentype'),
+        url('./font/RecoletaAlt-Light.woff2') format('woff2'),
+        url('./font/RecoletaAlt-Light.woff') format('woff'),
+        url('./font/RecoletaAlt-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta';
+    src: url('./font/Recoleta-SemiBold.eot');
+    src: local('Recoleta SemiBold'), local('Recoleta-SemiBold'),
+        url('./font/Recoleta-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('./font/Recoleta-SemiBold.woff2') format('woff2'),
+        url('./font/Recoleta-SemiBold.woff') format('woff'),
+        url('./font/Recoleta-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta';
+    src: url('./font/Recoleta-Regular.eot');
+    src: local('Recoleta Regular'), local('Recoleta-Regular'),
+        url('./font/Recoleta-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./font/Recoleta-Regular.woff2') format('woff2'),
+        url('./font/Recoleta-Regular.woff') format('woff'),
+        url('./font/Recoleta-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta';
+    src: url('./font/Recoleta-Bold.eot');
+    src: local('Recoleta Bold'), local('Recoleta-Bold'),
+        url('./font/Recoleta-Bold.eot?#iefix') format('embedded-opentype'),
+        url('./font/Recoleta-Bold.woff2') format('woff2'),
+        url('./font/Recoleta-Bold.woff') format('woff'),
+        url('./font/Recoleta-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta';
+    src: url('./font/Recoleta-Black.eot');
+    src: local('Recoleta Black'), local('Recoleta-Black'),
+        url('./font/Recoleta-Black.eot?#iefix') format('embedded-opentype'),
+        url('./font/Recoleta-Black.woff2') format('woff2'),
+        url('./font/Recoleta-Black.woff') format('woff'),
+        url('./font/Recoleta-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta';
+    src: url('./font/Recoleta-Light.eot');
+    src: local('Recoleta Light'), local('Recoleta-Light'),
+        url('./font/Recoleta-Light.eot?#iefix') format('embedded-opentype'),
+        url('./font/Recoleta-Light.woff2') format('woff2'),
+        url('./font/Recoleta-Light.woff') format('woff'),
+        url('./font/Recoleta-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+
   .cursor-newtab {
     cursor: url('/images/new-tab.png') 10 10, pointer;
   }
