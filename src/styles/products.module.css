@@ -21,3 +21,18 @@
 .closeIcon {
   @apply absolute top-2 right-2 cursor-pointer text-lg;
 }
+
+.container {
+  /* backgroundColor: '#FFF'; */
+  border: '1px solid #ebebeb';
+  borderRadius: '8px';
+  boxShadow: '0px 4px 12px rgba(0; 0; 0; 0.12)';
+  maxWidth: '500px';
+  padding: '36px';
+  height: '550px';
+  marginBottom: '40px';
+  display: 'flex';
+  flexDirection: 'column';
+  marginLeft: ' 8px';
+  marginRight: '8px';
+}

@@ -67,7 +67,7 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
                       <Link key={index} href={link.href}>
                         <a
                           className={
-                            'font-mediumtext-gray-900 text-base hover:text-blue-700' +
+                            'font-mediumtext-gray-900 text-large hover:text-blue-700' +
                             ' ' +
                             `${
                               router.pathname === link.href ||
@@ -86,13 +86,13 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
                   <>
                     <a
                       href='/'
-                      className='font-mediumtext-gray-900 text-base hover:text-blue-700'
+                      className='text-lg font-medium text-gray-900 hover:text-blue-700'
                     >
                       Dad's Beans
                     </a>
                     <a
                       href='/about'
-                      className='font-mediumtext-gray-900 text-base hover:text-blue-700'
+                      className='text-lg font-medium text-gray-900 hover:text-blue-700'
                     >
                       About Us
                     </a>

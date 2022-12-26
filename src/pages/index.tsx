@@ -60,19 +60,19 @@ export default function HomePage({ products }: any) {
       <main>
         <section>
           <div className='relative px-6 lg:px-8'>
-            <div className='mx-auto max-w-3xl pt-20 pb-24 sm:pt-48 sm:pb-32'>
+            <div className='mx-auto max-w-3xl pt-16 pb-12 sm:pt-32 sm:pb-24'>
               <div>
                 <h1 className='text-4xl font-bold tracking-tight sm:text-center sm:text-6xl'>
                   Roasting Dreams While Roasting Beans
                 </h1>
-                <p className='mt-6 text-lg leading-8 text-gray-600 sm:text-center'>
+                <p className='mt-6 font-secondary text-2xl leading-8 text-gray-800 sm:text-center'>
                   Home-roasted coffee beans made in small batches by my dad. Get
                   life advice in roast form and motivation in bean form.
                 </p>
 
                 <div className='mt-8 hidden sm:mb-8 sm:flex sm:justify-center'>
                   <div className='relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20'>
-                    <span className='text-gray-800'>
+                    <span className='font-secondary text-base text-gray-800'>
                       <a href='#' className='font-semibold text-yellow-800'>
                         <span className='absolute inset-0' aria-hidden='true' />
                         Sign up
@@ -105,7 +105,7 @@ export default function HomePage({ products }: any) {
               </div>
             </div>
           </div>
-          <div className='layout flex min-h-screen flex-col items-center justify-center text-center'>
+          <div className='flex min-h-screen flex-col items-center text-center'>
             <Products products={products} />
           </div>
         </section>

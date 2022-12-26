@@ -7,7 +7,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        primary: ['Recoleta', 'Monaco'],
+        primary: ['Recoleta', 'Inter'],
+        secondary: ['Sofia'],
+        mono: ['Monaco'],
       },
       colors: {
         primary: {
