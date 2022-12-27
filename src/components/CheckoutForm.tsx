@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { ChangeEvent, MouseEvent, useState, useEffect } from 'react'
 
 import { useShoppingCart } from 'use-shopping-cart'
 // import { CheckIcon, ClockIcon } from '@heroicons/react/solid'
@@ -34,12 +34,29 @@ const CheckoutForm = () => {
   const {
     formattedTotalPrice,
     cartCount,
-    clearCart,
     cartDetails,
     redirectToCheckout,
+    removeItem,
+    setItemQuantity,
   } = useShoppingCart()
 
   useEffect(() => setCartEmpty(!cartCount), [cartCount])
+
+  const changeItemQuantity: (
+    key: string
+  ) => React.ChangeEventHandler<HTMLSelectElement> =
+    (key: string) => (event: ChangeEvent<HTMLSelectElement>) => {
+      console.log('onChange:', event.target.value)
+      setItemQuantity(key, Number(event.target.value))
+    }
+
+  const handleRemoveItem: (
+    key: string
+  ) => React.MouseEventHandler<HTMLButtonElement> =
+    (key: string) => (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault()
+      removeItem(key)
+    }
 
   const handleCheckout: React.FormEventHandler<HTMLFormElement> = async (
     event
@@ -134,6 +151,7 @@ const CheckoutForm = () => {
                               value={cartDetails[key].quantity}
                               id={`quantity-${index}`}
                               name={`quantity-${index}`}
+                              onChange={changeItemQuantity(key)}
                               className='block max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm'
                             >
                               <option value={1}>1</option>
@@ -149,6 +167,7 @@ const CheckoutForm = () => {
                             <button
                               type='button'
                               className='ml-4 text-sm font-medium text-indigo-600 hover:text-indigo-500 sm:ml-0 sm:mt-3'
+                              onClick={handleRemoveItem(key)}
                             >
                               <span>Remove</span>
                             </button>
