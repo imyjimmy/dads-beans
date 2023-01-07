@@ -5,6 +5,7 @@ import { renderPrice } from '@/lib/utils'
 
 import toast, { Toaster } from 'react-hot-toast'
 import styles from '@/styles/products.module.css'
+import Image from 'next/image'
 import { ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
 import { useShoppingCart } from 'use-shopping-cart'
 
@@ -111,22 +112,22 @@ const Products = ({ products }: Props) => {
           {/* Image gallery */}
           <div className='mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8'>
             <div className='aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block'>
-              <img
+              <Image
                 src={product.pictures[0].url}
-                // alt={product.pictures[0].alt}
+                alt={product.pictures[0].alt ?? ''}
                 className='h-full w-full object-cover object-center'
               />
             </div>
             <div className='hidden lg:grid lg:grid-cols-1 lg:gap-y-8'>
               <div className='aspect-w-3 aspect-h-2 overflow-hidden rounded-lg'>
-                <img
+                <Image
                   src={product.pictures[1].url}
                   // alt={product.pictures[1].alt}
                   className='h-full w-full object-cover object-center'
                 />
               </div>
               <div className='aspect-w-3 aspect-h-2 overflow-hidden rounded-lg'>
-                <img
+                <Image
                   src={product.pictures[2].url}
                   // alt={product.pictures[2].alt}
                   className='h-full w-full object-cover object-center'
@@ -134,7 +135,7 @@ const Products = ({ products }: Props) => {
               </div>
             </div>
             <div className='aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4'>
-              <img
+              <Image
                 src={product.pictures[3].url}
                 // alt={product.pictures[3].alt}
                 className='h-full w-full object-cover object-center'
