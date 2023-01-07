@@ -3,6 +3,7 @@ import { ElementNode } from '@graphcms/rich-text-types'
 export type PriceVariant = {
   weight: number
   price: number
+  inStock: boolean
 }
 
 export type Picture = {

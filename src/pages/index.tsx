@@ -31,6 +31,7 @@ export async function getStaticProps() {
           priceVariants {
             weight
             price
+            inStock
           }
           pictures {
             fileName
