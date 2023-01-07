@@ -7,20 +7,8 @@ import { useRouter } from 'next/router'
 
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-// import { useUser } from '../../lib/UserProvider'
 import styles from './Header.module.css'
 import { ShoppingBagIcon } from '@heroicons/react/outline'
-
-/*
-import { circlePic } from '../../lib/utils'
-import SvgShoppingBag from '../icons/ShoppingBag'
-import UnstyledLink from '@/components/links/UnstyledLink'
-*/
-
-const links = [
-  { href: '/', label: 'Route 1' },
-  { href: '/', label: 'Route 2' },
-]
 
 type Props = {
   currentPage?: string
@@ -32,7 +20,6 @@ function classNames(...classes: string[]) {
 
 const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
   const router = useRouter()
-  // const { user } = useUser()
   const user = undefined
 
   const loggedInLinks = [
@@ -46,7 +33,6 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
       <Popover className='relative bg-white'>
         {({ open }) => (
           <>
-            {/* <div className="max-w-7xl mx-auto px-4 sm:px-6"> */}
             <div //className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10"
               id='header'
               className={`mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 ${
@@ -59,7 +45,6 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
                   <MenuIcon className='h-6 w-6' aria-hidden='true' />
                 </Popover.Button>
               </div>
-              {/* <Popover.Group as="nav" className="hidden md:flex space-x-10"> */}
               <nav className='hidden space-x-10 md:flex'>
                 {user ? (
                   <>
@@ -200,26 +185,12 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
                 ) : (
                   <>
                     <a href='/cart'>
-                      {/* <SvgShoppingBag className='h-6 w-6' /> */}
                       <ShoppingBagIcon className='h-6 w-6' />
                     </a>
-                    {/* <a
-                      href='/login'
-                      className='whitespace-nowrap text-base font-mediumtext-gray-900 hover:text-blue-700'
-                    >
-                      Sign in
-                    </a>
-                    <a
-                      href='/signup'
-                      className='my-2 ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700'
-                    >
-                      Sign up
-                    </a> */}
                   </>
                 )}
               </div>
             </div>
-            {/* </div> */}
 
             <Transition
               show={open}
@@ -243,7 +214,7 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
                         {/* <img alt="bitcoin logo" draggable="false" src="/images/Bitcoin.png" className={styles.bitcoinLogo} /> */}
                         <img
                           className='h-8 w-auto'
-                          src='/images/Bitcoin.png'
+                          src='/favicon/favicon-32x32.png'
                           alt='Workflow'
                         />
                       </div>
@@ -286,12 +257,6 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
                               Dad's Beans
                             </a>
                             <a
-                              href='/pricing'
-                              className='font-mediumtext-gray-900 text-base hover:text-blue-700'
-                            >
-                              Pricing
-                            </a>
-                            <a
                               href='/about'
                               className='font-mediumtext-gray-900 text-base hover:text-blue-700'
                             >
@@ -305,7 +270,7 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
                   <div className='space-y-6 py-6 px-5'>
                     {/* 
                     sandwhich section 
-                  */}
+                    */}
                     {user ? (
                       <>
                         <div className='mr-2'>
@@ -322,20 +287,11 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
                         </div>
                       </>
                     ) : (
-                      <div>
-                        <a
-                          href='/signup'
-                          className='mb-2 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700'
-                        >
-                          Sign up
+                      <>
+                        <a href='/cart'>
+                          <ShoppingBagIcon className='h-6 w-6' />
                         </a>
-                        <a
-                          href='/login'
-                          className='flex w-full items-center justify-center rounded-md border border-transparent bg-yellow-600 bg-opacity-80 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-opacity-70 hover:text-blue-700'
-                        >
-                          Sign in
-                        </a>
-                      </div>
+                      </>
                     )}
                   </div>
                 </div>

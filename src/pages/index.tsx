@@ -71,7 +71,7 @@ export default function HomePage({ products }: any) {
                   life advice in roast form and motivation in bean form.
                 </p>
 
-                <div className='mt-8 hidden sm:mb-8 sm:flex sm:justify-center'>
+                <div className='mt-8 sm:mb-8 sm:flex sm:justify-center'>
                   <div className='relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20'>
                     <span className='font-secondary text-base text-gray-800'>
                       <a href='#' className='font-semibold text-yellow-800'>
