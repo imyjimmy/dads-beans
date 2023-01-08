@@ -116,6 +116,7 @@ const Products = ({ products }: Props) => {
                 src={product.pictures[0].url}
                 alt={product.pictures[0].alt ?? ''}
                 className='h-full w-full object-cover object-center'
+                layout={'fill'}
               />
             </div>
             <div className='hidden lg:grid lg:grid-cols-1 lg:gap-y-8'>
@@ -124,6 +125,7 @@ const Products = ({ products }: Props) => {
                   src={product.pictures[1].url}
                   // alt={product.pictures[1].alt}
                   className='h-full w-full object-cover object-center'
+                  layout={'fill'}
                 />
               </div>
               <div className='aspect-w-3 aspect-h-2 overflow-hidden rounded-lg'>
@@ -131,6 +133,7 @@ const Products = ({ products }: Props) => {
                   src={product.pictures[2].url}
                   // alt={product.pictures[2].alt}
                   className='h-full w-full object-cover object-center'
+                  layout={'fill'}
                 />
               </div>
             </div>
@@ -139,6 +142,7 @@ const Products = ({ products }: Props) => {
                 src={product.pictures[3].url}
                 // alt={product.pictures[3].alt}
                 className='h-full w-full object-cover object-center'
+                layout={'fill'}
               />
             </div>
           </div>
