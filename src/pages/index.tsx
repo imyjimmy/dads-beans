@@ -78,7 +78,7 @@ export default function HomePage({ products }: any) {
                         <span className='absolute inset-0' aria-hidden='true' />
                         Sign up
                       </a>{' '}
-                      for a weekly roast delivered to your inbox, but promise
+                      for a monthly roast delivered to your inbox, but promise
                       not to be offended 🤝
                     </span>
                   </div>
