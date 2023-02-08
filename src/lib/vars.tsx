@@ -1,4 +1,4 @@
-import { Amplify } from 'aws-amplify'
+/* eslint-disable  @typescript-eslint/no-non-null-assertion */
 
 // restart dev server to see changes take effect
 const devKeys: { [keyName: string]: string } = {
@@ -30,13 +30,4 @@ const getEnv = (requestedKey: string) => {
   }
 }
 
-const amplify = Amplify.configure({
-  Auth: {
-    region: getEnv('awsRegion'),
-    userPoolId: getEnv('userPoolId'),
-    userPoolWebClientId: getEnv('userPoolWebClientId'),
-  },
-  ssr: true,
-})
-
-export { getEnv, amplify }
+export { getEnv }

@@ -6,7 +6,7 @@ import { renderPrice } from '@/lib/utils'
 import toast, { Toaster } from 'react-hot-toast'
 import styles from '@/styles/products.module.css'
 import Image from 'next/image'
-import NextImage from '@/components/NextImage'
+import Link from 'next/link'
 
 import { ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
 import { useShoppingCart } from 'use-shopping-cart'
@@ -39,7 +39,7 @@ const notify = (): string =>
         <div className={styles.contentWrapper}>
           <h1>Added to your Cart!</h1>
           <h2>
-            <a href='/cart'>Checkout</a>
+            <Link href='/cart'>Checkout</Link>
           </h2>
           <p></p>
         </div>
@@ -123,7 +123,7 @@ const Products = ({ products }: Props) => {
                 src={product.pictures[0].url}
                 alt={product.pictures[0].alt ?? ''}
                 className='h-full w-full object-cover object-center'
-                layout={'fill'}
+                layout='fill'
               />
             </div>
             <div className='hidden lg:grid lg:grid-cols-1 lg:gap-y-8'>
@@ -132,7 +132,7 @@ const Products = ({ products }: Props) => {
                   src={product.pictures[1].url}
                   // alt={product.pictures[1].alt}
                   className='h-full w-full object-cover object-center'
-                  layout={'fill'}
+                  layout='fill'
                 />
               </div>
               <div className='aspect-w-3 aspect-h-2 overflow-hidden rounded-lg'>
@@ -140,7 +140,7 @@ const Products = ({ products }: Props) => {
                   src={product.pictures[2].url}
                   // alt={product.pictures[2].alt}
                   className='h-full w-full object-cover object-center'
-                  layout={'fill'}
+                  layout='fill'
                 />
               </div>
             </div>
@@ -149,7 +149,7 @@ const Products = ({ products }: Props) => {
                 src={product.pictures[3].url}
                 alt={product.pictures[3].alt}
                 className='h-full w-full object-cover object-center'
-                layout={'fill'}
+                layout='fill'
               />
             </div>
           </div>

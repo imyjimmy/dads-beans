@@ -13,11 +13,6 @@ import { ImSpinner2 } from 'react-icons/im'
 
 //<configs>
 export const CURRENCY = 'usd'
-// Set your amount limits: Use float for decimal currencies and
-// Integer for zero-decimal currencies: https://stripe.com/docs/currencies#zero-decimal.
-export const MIN_AMOUNT = 10.0
-export const MAX_AMOUNT = 5000.0
-export const AMOUNT_STEP = 5.0
 //</configs>
 
 type CartItem = {
@@ -259,26 +254,3 @@ const CheckoutForm = () => {
 }
 
 export default CheckoutForm
-
-{
-  /*<form onSubmit={handleSubmit}>
-      <CustomDonationInput
-        className='checkout-style'
-        name={'customDonation'}
-        value={input.customDonation}
-        min={MIN_AMOUNT}
-        max={MAX_AMOUNT}
-        step={AMOUNT_STEP}
-        currency={CURRENCY}
-        onChange={handleInputChange}
-      />
-      <StripeTestCards />
-      <button
-        className='checkout-style-background'
-        type='submit'
-        disabled={loading}
-      >
-        Donate {formatAmountForDisplay(input.customDonation, CURRENCY)}
-      </button>
-    </form> */
-}
