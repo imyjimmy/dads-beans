@@ -73,7 +73,7 @@ export default async function handler(
       console.log('total: ', total)
 
       let shippingRates
-      if (total > 5000) {
+      if (total > 2000) {
         shippingRates = {}
       } else {
         shippingRates = await fetch(
