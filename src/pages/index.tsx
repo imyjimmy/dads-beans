@@ -4,7 +4,10 @@ import client from '../../apollo-client'
 
 import Layout from '@/components/layout/Layout'
 import Products from '@/components/Products'
-import Seo from '@/components/Seo'
+import NextImage from '@/components/NextImage'
+// import Image from 'next/image'
+
+// import Seo from '@/components/Seo'
 
 /**
  * SVGR Support
@@ -64,24 +67,37 @@ export default function HomePage({ products }: any) {
             <div className='mx-auto max-w-3xl pt-16 pb-12 sm:pt-32 sm:pb-24'>
               <div>
                 <h1 className='text-4xl font-bold tracking-tight sm:text-center sm:text-6xl'>
-                  Roasting Dreams While Roasting Beans
+                  Home Roasted Coffee Beans
                 </h1>
-                <p className='mt-6 font-secondary text-2xl leading-8 text-gray-800 sm:text-center'>
-                  Home-roasted coffee beans made in small batches by my dad. Get
-                  life advice in roast form and motivation in bean form.
-                </p>
+                <h2 className='mt-6 sm:text-center'>
+                  Made in Small Batches by My Dad
+                </h2>
+                <p className='mt-6 font-secondary text-2xl leading-8 text-gray-800 sm:text-center'></p>
 
                 <div className='mt-8 sm:mb-8 sm:flex sm:justify-center'>
-                  <div className='relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20'>
+                  {/* <div className='relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20'>
                     <span className='font-secondary text-base text-gray-800'>
+                      My Dad is roasting dreams while roasting beans!{' '}
                       <a href='#' className='font-semibold text-yellow-800'>
                         <span className='absolute inset-0' aria-hidden='true' />
                         Sign up
                       </a>{' '}
-                      for a monthly roast delivered to your inbox, but promise
-                      not to be offended 🤝
+                      for a monthly roast delivered to your inbox
                     </span>
-                  </div>
+                  </div> */}
+
+                  <NextImage
+                    useSkeleton
+                    className='w-2/5'
+                    src='/images/dad-roast.jpg'
+                    width='390'
+                    height='691'
+                    alt='dad-roasting'
+                    style={{
+                      objectFit: 'cover',
+                      borderRadius: '10px',
+                    }}
+                  />
                 </div>
                 {/* <div className='mt-8 flex gap-x-4 sm:justify-center'>
                   <a

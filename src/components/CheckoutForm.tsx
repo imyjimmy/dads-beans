@@ -2,13 +2,14 @@ import React, { ChangeEvent, MouseEvent, useState, useEffect } from 'react'
 
 import { useShoppingCart } from 'use-shopping-cart'
 // import { CheckIcon, ClockIcon } from '@heroicons/react/solid'
-
 // import CustomDonationInput from '@/components/CustomDonationInput'
 // import StripeTestCards from '@/components/StripeTestCards'
-
-import getStripe from '@/lib/get-stripe'
+// import getStripe from '@/lib/get-stripe'
 import { fetchPostJSON } from '@/lib/api'
 import { renderPrice } from '@/lib/utils'
+
+// import Button from '@/components/buttons/Button'
+import { ImSpinner2 } from 'react-icons/im'
 
 //<configs>
 export const CURRENCY = 'usd'
@@ -152,7 +153,7 @@ const CheckoutForm = () => {
                               id={`quantity-${index}`}
                               name={`quantity-${index}`}
                               onChange={changeItemQuantity(key)}
-                              className='block max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm'
+                              className='block max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-yellow-800 focus:outline-none focus:ring-1 focus:ring-yellow-600 sm:text-sm'
                             >
                               <option value={1}>1</option>
                               <option value={2}>2</option>
@@ -166,7 +167,7 @@ const CheckoutForm = () => {
 
                             <button
                               type='button'
-                              className='ml-4 text-sm font-medium text-indigo-600 hover:text-indigo-500 sm:ml-0 sm:mt-3'
+                              className='ml-4 text-sm font-medium text-yellow-900 hover:text-yellow-700 sm:ml-0 sm:mt-3'
                               onClick={handleRemoveItem(key)}
                             >
                               <span>Remove</span>
@@ -223,11 +224,29 @@ const CheckoutForm = () => {
             </div>
 
             <div className='mt-10'>
+              {false ? (
+                <div
+                  className={
+                    'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+                  }
+                >
+                  <ImSpinner2 className='animate-spin' />
+                </div>
+              ) : (
+                <></>
+              )}
               <button
+                //isLoading={loading}
                 type='submit'
-                className='w-full rounded-md border border-transparent bg-indigo-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50'
+                className='w-full rounded-md border border-transparent bg-yellow-900 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-gray-50'
               >
-                Checkout
+                {true ? (
+                  <div className={'bg-yellow-900'}>
+                    <ImSpinner2 className='mx-auto animate-spin' />
+                  </div>
+                ) : (
+                  <>Checkout</>
+                )}
               </button>
             </div>
 
@@ -236,7 +255,7 @@ const CheckoutForm = () => {
                 or {''}
                 <a
                   href='#'
-                  className='font-medium text-indigo-600 hover:text-indigo-500'
+                  className='font-medium text-yellow-900 hover:text-yellow-700'
                 >
                   Continue Shopping
                   <span aria-hidden='true'> &rarr;</span>

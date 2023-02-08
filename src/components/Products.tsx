@@ -6,6 +6,8 @@ import { renderPrice } from '@/lib/utils'
 import toast, { Toaster } from 'react-hot-toast'
 import styles from '@/styles/products.module.css'
 import Image from 'next/image'
+import NextImage from '@/components/NextImage'
+
 import { ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
 import { useShoppingCart } from 'use-shopping-cart'
 
@@ -105,9 +107,11 @@ const Products = ({ products }: Props) => {
       <div className='bg-white'>
         <div className='pt-6'>
           <div className='ml-8 text-left lg:col-span-2 lg:pr-8'>
-            <h1 className='text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl'>
-              {product?.name}
-            </h1>
+            <h2 className=''>{product?.name}</h2>
+            <h4 className='text-md font-medium text-gray-600'>
+              {product?.subtitle}
+            </h4>
+            <h3 className='sr-only'>Description</h3>
           </div>
           {/* Image gallery */}
           <div className='mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8'>
@@ -140,7 +144,7 @@ const Products = ({ products }: Props) => {
             <div className='aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4'>
               <Image
                 src={product.pictures[3].url}
-                // alt={product.pictures[3].alt}
+                alt={product.pictures[3].alt}
                 className='h-full w-full object-cover object-center'
                 layout={'fill'}
               />
@@ -152,9 +156,7 @@ const Products = ({ products }: Props) => {
             <div className='lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8'>
               {/* Description and details */}
               <div>
-                <h3 className='text-2xl font-bold'>{product?.subtitle}</h3>
-                <h3 className='sr-only'>Description</h3>
-                <div className='mt-4 flex flex-col space-y-8'>
+                <div className='flex flex-col space-y-8'>
                   <div className='text-base text-gray-900'>
                     <RichText
                       content={product!.description.raw}
