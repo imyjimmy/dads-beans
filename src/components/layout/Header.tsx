@@ -9,6 +9,7 @@ import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import styles from './Header.module.css'
 import { ShoppingBagIcon } from '@heroicons/react/outline'
+import { useShoppingCart } from 'use-shopping-cart'
 
 type Props = {
   currentPage?: string
@@ -21,6 +22,8 @@ function classNames(...classes: string[]) {
 const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
   const router = useRouter()
   const user = undefined
+
+  const { cartCount } = useShoppingCart()
 
   const loggedInLinks = [
     { href: '/#', text: 'test' },
@@ -37,7 +40,7 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
               id='header'
               className={`mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 ${
                 user ? 'py-4' : 'py-2'
-              } md:justify-start md:space-x-10`}
+              } pt-8 md:justify-start md:space-x-10`}
             >
               <div className='-my-2 -mr-2 md:hidden'>
                 <Popover.Button className='inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
@@ -186,6 +189,13 @@ const Header: React.FC<Props> = ({ currentPage }): ReactElement => {
                   <>
                     <a href='/cart'>
                       <ShoppingBagIcon className='h-6 w-6' />
+                      {cartCount && cartCount > 0 ? (
+                        <span className='top right absolute top-5 m-1 h-4 w-4 rounded-full bg-yellow-900 p-0 text-center font-mono text-sm  leading-tight text-white'>
+                          {cartCount}
+                        </span>
+                      ) : (
+                        <></>
+                      )}
                     </a>
                   </>
                 )}

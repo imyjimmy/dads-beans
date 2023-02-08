@@ -38,6 +38,9 @@ const notify = (): string =>
         </div>
         <div className={styles.contentWrapper}>
           <h1>Added to your Cart!</h1>
+          <h2>
+            <a href='/cart'>Checkout</a>
+          </h2>
           <p></p>
         </div>
         <div className={styles.closeIcon} onClick={() => toast.dismiss(t.id)}>
