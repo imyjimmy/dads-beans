@@ -224,23 +224,12 @@ const CheckoutForm = () => {
             </div>
 
             <div className='mt-10'>
-              {false ? (
-                <div
-                  className={
-                    'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
-                  }
-                >
-                  <ImSpinner2 className='animate-spin' />
-                </div>
-              ) : (
-                <></>
-              )}
               <button
                 //isLoading={loading}
                 type='submit'
                 className='w-full rounded-md border border-transparent bg-yellow-900 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-gray-50'
               >
-                {true ? (
+                {loading ? (
                   <div className={'bg-yellow-900'}>
                     <ImSpinner2 className='mx-auto animate-spin' />
                   </div>
