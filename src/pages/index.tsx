@@ -74,7 +74,7 @@ export default function HomePage({ products }: any) {
                 </h2>
                 <p className='mt-6 font-secondary text-2xl leading-8 text-gray-800 sm:text-center'></p>
 
-                <div className='mt-8 sm:mb-8 sm:flex sm:justify-center'>
+                <div className='mt-8 justify-center sm:mb-8 sm:flex'>
                   {/* <div className='relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20'>
                     <span className='font-secondary text-base text-gray-800'>
                       My Dad is roasting dreams while roasting beans!{' '}
