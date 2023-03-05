@@ -9,6 +9,7 @@ const devKeys: { [keyName: string]: string } = {
   authToken: process!.env!.HYGRAPH_DEVELOPMENT!,
   stripePublic: process!.env!.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
   stripeSecret: process!.env!.STRIPE_SECRET_KEY!,
+  btcPayServer: process!.env!.BTCPAYSERVER_ENDPOINT!,
 }
 
 const prodKeys: { [keyName: string]: string } = {
@@ -19,6 +20,7 @@ const prodKeys: { [keyName: string]: string } = {
   authToken: process!.env!.HYGRAPH_PRODUCTION!,
   stripePublic: process!.env!.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
   stripeSecret: process!.env!.STRIPE_SECRET_KEY!,
+  btcPayServer: process!.env!.BTCPAYSERVER_ENDPOINT!,
 }
 
 // check enviroment if development || production

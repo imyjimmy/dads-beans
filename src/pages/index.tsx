@@ -5,6 +5,10 @@ import client from '../../apollo-client'
 import Layout from '@/components/layout/Layout'
 import Products from '@/components/Products'
 import NextImage from '@/components/NextImage'
+
+import { getEnv } from '@/lib/vars'
+import { ProductProps } from '@/lib/types'
+
 // import Image from 'next/image'
 
 // import Seo from '@/components/Seo'
@@ -50,15 +54,17 @@ export async function getStaticProps() {
       }
     `,
   })
+  const btcPayServer = getEnv('btcPayServer')
 
   return {
     props: {
       products: data.products,
+      btcPayServer,
     },
   }
 }
 
-export default function HomePage({ products }: any) {
+export default function HomePage({ products, btcPayServer }: ProductProps) {
   return (
     <Layout>
       <main>
@@ -123,7 +129,7 @@ export default function HomePage({ products }: any) {
             </div>
           </div>
           <div className='flex min-h-screen flex-col items-center text-center'>
-            <Products products={products} />
+            <Products products={products} btcPayServer={btcPayServer} />
           </div>
         </section>
       </main>

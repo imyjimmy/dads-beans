@@ -24,6 +24,7 @@ export type Product = {
   thumbnail: Picture
 }
 
-export type Props = {
+export type ProductProps = {
   products: Product[]
+  btcPayServer: string
 }

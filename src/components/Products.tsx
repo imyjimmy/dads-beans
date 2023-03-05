@@ -2,6 +2,7 @@ import { FormEvent, useState, useEffect } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { RichText } from '@graphcms/rich-text-react-renderer'
 import { renderPrice } from '@/lib/utils'
+import { getEnv } from '@/lib/vars'
 
 import toast, { Toaster } from 'react-hot-toast'
 import styles from '@/styles/products.module.css'
@@ -11,7 +12,7 @@ import Link from 'next/link'
 import { ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
 import { useShoppingCart } from 'use-shopping-cart'
 
-import { Product, PriceVariant, Props } from '@/lib/types'
+import { Product, PriceVariant, ProductProps } from '@/lib/types'
 
 // a pretend data structure called reviews
 // const reviews = { href: '#', average: 4, totalCount: 117 }
@@ -60,7 +61,7 @@ type CartItem = {
   thumbnail: string
 }
 
-const Products = ({ products }: Props) => {
+const Products = ({ products, btcPayServer }: ProductProps) => {
   // probably a hack but its data about the product!!
   const [product, setProduct] = useState<Product>()
 
@@ -195,7 +196,7 @@ const Products = ({ products }: Props) => {
                 )}
               </p>
 
-              <form className='mt-10' onSubmit={onSubmit}>
+              <form className='mt-10' method='POST' action={btcPayServer}>
                 {/* Sizes */}
                 <div className='mt-10'>
                   <div className='flex items-center justify-between'>
@@ -281,6 +282,7 @@ const Products = ({ products }: Props) => {
                       type='number'
                       name='quantity'
                       id='quantity'
+                      disabled={true}
                       value={quantity}
                       onChange={(event) => {
                         setQuantity(
@@ -289,16 +291,35 @@ const Products = ({ products }: Props) => {
                             : Number(event.target.value)
                         )
                       }}
-                      className='block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm'
+                      className='
+                      block w-full cursor-not-allowed
+                      border-0 bg-gray-50 p-0 text-gray-200 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm'
                     />
                   </div>
                 </div>
-
+                <input
+                  type='hidden'
+                  name='email'
+                  value='customer@example.com'
+                />
+                <input type='hidden' name='orderId' value='CustomOrderId' />
+                <input
+                  type='hidden'
+                  name='notificationUrl'
+                  value='https://example.com/callbacks'
+                />
+                <input
+                  type='hidden'
+                  name='redirectUrl'
+                  value='https://example.com/thanksyou'
+                />
                 <button
                   type='submit'
+                  name='choiceKey'
+                  value='dads beans december roast 16oz'
                   className='mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-amber-800 py-3 px-8 text-base font-medium text-white hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2'
                 >
-                  Add to Cart
+                  Buy with Bitcoin
                 </button>
               </form>
             </div>
