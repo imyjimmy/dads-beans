@@ -232,35 +232,6 @@ const CheckoutForm = () => {
                   <>Checkout</>
                 )}
               </button>
-              <div>hey</div>
-              <form
-                method='POST'
-                action='https://btcpay554942.lndyn.com/apps/2YnoD4c8iVKVczvsdhWcV37sdNzM/pos'
-              >
-                <input
-                  type='hidden'
-                  name='email'
-                  value='customer@example.com'
-                />
-                <input type='hidden' name='orderId' value='CustomOrderId' />
-                <input
-                  type='hidden'
-                  name='notificationUrl'
-                  value='https://example.com/callbacks'
-                />
-                <input
-                  type='hidden'
-                  name='redirectUrl'
-                  value='https://example.com/thanksyou'
-                />
-                <button
-                  type='submit'
-                  name='choiceKey'
-                  value='dads beans december roast 16oz'
-                >
-                  Buy now
-                </button>
-              </form>
             </div>
 
             <div className='mt-6 text-center text-sm'>
