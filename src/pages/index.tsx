@@ -54,17 +54,26 @@ export async function getStaticProps() {
       }
     `,
   })
+  const COINGECKO_API = 'https://api.coingecko.com/api/v3/exchange_rates'
+  const coingeckoPrice = await fetch(COINGECKO_API)
+  let price = await coingeckoPrice.json()
+  console.log('price:', price.rates.usd)
   const btcPayServer = getEnv('btcPayServer')
 
   return {
     props: {
       products: data.products,
       btcPayServer,
+      exchangeRate: price.rates.usd,
     },
   }
 }
 
-export default function HomePage({ products, btcPayServer }: ProductProps) {
+export default function HomePage({
+  products,
+  btcPayServer,
+  exchangeRate,
+}: ProductProps) {
   return (
     <Layout>
       <main>
@@ -129,7 +138,11 @@ export default function HomePage({ products, btcPayServer }: ProductProps) {
             </div>
           </div>
           <div className='flex min-h-screen flex-col items-center text-center'>
-            <Products products={products} btcPayServer={btcPayServer} />
+            <Products
+              products={products}
+              btcPayServer={btcPayServer}
+              exchangeRate={exchangeRate}
+            />
           </div>
         </section>
       </main>

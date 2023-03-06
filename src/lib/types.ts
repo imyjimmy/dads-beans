@@ -4,6 +4,7 @@ export type PriceVariant = {
   weight: number
   price: number
   inStock: boolean
+  satsPrice?: number
 }
 
 export type Picture = {
@@ -27,4 +28,10 @@ export type Product = {
 export type ProductProps = {
   products: Product[]
   btcPayServer: string
+  exchangeRate: {
+    name: string
+    unit: string
+    value: number
+    type: 'fiat' | 'crypto'
+  }
 }

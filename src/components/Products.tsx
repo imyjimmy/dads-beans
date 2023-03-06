@@ -61,15 +61,40 @@ type CartItem = {
   thumbnail: string
 }
 
-const Products = ({ products, btcPayServer }: ProductProps) => {
+const Products = ({ products, btcPayServer, exchangeRate }: ProductProps) => {
   // probably a hack but its data about the product!!
   const [product, setProduct] = useState<Product>()
 
   const [priceVariant, setPriceVariant] = useState<PriceVariant>()
-  //const [weight, setWeight] = useState<number>(12)
+  const [btcPrice, setBtcPrice] = useState<number>()
   const [quantity, setQuantity] = useState<number | undefined>(1)
 
   const { addItem } = useShoppingCart()
+
+  const BTC_DISCOUNT = 0.8
+
+  useEffect(() => {
+    /* 100,000,000 sats / price.usd = x sats / 20 usd
+      x sats = (100,000,000 / price.usd) * 20
+    */
+    if (
+      exchangeRate &&
+      exchangeRate.value &&
+      priceVariant &&
+      priceVariant.price
+    ) {
+      setBtcPrice(Math.floor((100000000 / exchangeRate.value) * 20))
+      setPriceVariant({
+        ...priceVariant!,
+        satsPrice: Math.floor(
+          ((100000000 / exchangeRate.value) *
+            priceVariant!.price *
+            BTC_DISCOUNT) /
+            100 // price is in cents
+        ),
+      })
+    }
+  }, [exchangeRate, priceVariant])
 
   const onSubmit = (event: FormEvent): void => {
     event.preventDefault()
@@ -98,6 +123,7 @@ const Products = ({ products, btcPayServer }: ProductProps) => {
   useEffect(() => {
     if (products && products.length > 0) {
       setProduct(products[0])
+      // hard coded
       setPriceVariant(products[0].priceVariants[0])
     }
   }, [products])
@@ -195,6 +221,11 @@ const Products = ({ products, btcPayServer }: ProductProps) => {
                   </>
                 )}
               </p>
+              <h5 className='mt-4'>20% BTC Discount</h5>
+              <p className='text-3xl tracking-tight text-gray-900'>
+                ~{priceVariant?.satsPrice} sats or{' '}
+                {renderPrice(priceVariant!.price * BTC_DISCOUNT)}
+              </p>
 
               <form className='mt-10' method='POST' action={btcPayServer}>
                 {/* Sizes */}
@@ -209,7 +240,6 @@ const Products = ({ products, btcPayServer }: ProductProps) => {
                     className='mt-4'
                   >
                     <RadioGroup.Label className='sr-only'>
-                      {' '}
                       Choose a size{' '}
                     </RadioGroup.Label>
                     <div className='grid grid-cols-3 gap-4 sm:grid-cols-3 lg:grid-cols-3'>
