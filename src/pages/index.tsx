@@ -56,7 +56,7 @@ export async function getStaticProps() {
   })
   const COINGECKO_API = 'https://api.coingecko.com/api/v3/exchange_rates'
   const coingeckoPrice = await fetch(COINGECKO_API)
-  let price = await coingeckoPrice.json()
+  const price = await coingeckoPrice.json()
   console.log('price:', price.rates.usd)
   const btcPayServer = getEnv('btcPayServer')
 
